@@ -1,0 +1,18 @@
+<Project Sdk="Microsoft.NET.Sdk">
+    <PropertyGroup>
+        <TargetFramework>net6.0</TargetFramework>
+        <RootNamespace>BTD6Rogue</RootNamespace>
+        <Configurations>Debug;Release</Configurations>
+        <Nullable>enable</Nullable>
+        <AssemblyName>BTD6Rogue</AssemblyName>
+        <LangVersion>latest</LangVersion>
+        <Optimize>False</Optimize>
+        <DebugType>embedded</DebugType>
+    </PropertyGroup>
+    <ItemGroup>
+      <Folder Include="Gamemodes\" />
+      <Folder Include="Roundsets\" />
+    </ItemGroup>
+
+    <Import Project="..\btd6.targets" />
+</Project>
