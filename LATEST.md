@@ -1,3 +1,21 @@
+Version 1.0:
+
+NEW FEATURES:
+- Bloonarius Boss
+- Better UI
+- Better difficulty scaling (Early/Late game was too hard, Mid game was too easy)
+- Multiple difficulty options
+- Better Code
+- Various Bug Fixes
+
+Upcoming in Version 1.1:
+- Vortex Boss
+- Lych Boss
+- Dreadbloon Boss
+- Difficulties effecting costs
+
+General Disclaimer:
+
 This mod is UNTESTED in anything other than the solo base game
 
 If you use this mod in:

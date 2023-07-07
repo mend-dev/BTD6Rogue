@@ -3,6 +3,7 @@ using Il2CppAssets.Scripts.Simulation.Input;
 using Il2CppAssets.Scripts.Unity.UI_New.InGame;
 using Il2CppAssets.Scripts.Unity;
 using HarmonyLib;
+using BTD_Mod_Helper.Extensions;
 
 namespace BTD6Rogue;
 
@@ -10,7 +11,7 @@ namespace BTD6Rogue;
 static class StartGamePatch {
     [HarmonyPostfix]
     private static void Postfix(InGame __instance) {
-        if (__instance.bridge.IsSandboxMode()) { return; }
+        if (BTD6Rogue.DisablePatchesInSandbox && __instance.bridge.IsSandboxMode()) { return; }
         BTD6Rogue.mod.StartRogueGame(__instance);
     }
 }

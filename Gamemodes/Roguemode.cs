@@ -4,4 +4,4 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BTD6Rogue;
+namespace BTD6Rogue.Gamemodes;

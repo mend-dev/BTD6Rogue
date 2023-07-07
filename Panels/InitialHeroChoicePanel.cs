@@ -21,6 +21,7 @@ public class InitialHeroChoicePanel : MonoBehaviour {
     public InitialHeroChoicePanel(IntPtr ptr) : base(ptr) { }
 
     public void ChooseTower(string hero) {
+        BTD6Rogue.mod.selectedHeroes.Add(hero);
         TowerInventory towerInventory = __instance.GetTowerInventory();
         towerInventory.towerMaxes[hero] = 1;
         __instance.bridge.OnTowerInventoryChangedSim(true);

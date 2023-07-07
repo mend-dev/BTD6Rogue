@@ -10,8 +10,7 @@
         <DebugType>embedded</DebugType>
     </PropertyGroup>
     <ItemGroup>
-      <Folder Include="Gamemodes\" />
-      <Folder Include="Roundsets\" />
+      <Folder Include="Artifacts\" />
     </ItemGroup>
 
     <Import Project="..\btd6.targets" />

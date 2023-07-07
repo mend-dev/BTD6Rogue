@@ -8,7 +8,7 @@ namespace BTD6Rogue;
 static class RestartGamePatch {
     [HarmonyPostfix]
     private static void Postfix(InGame __instance) {
-        if (__instance.bridge.IsSandboxMode()) { return; }
+        if (BTD6Rogue.DisablePatchesInSandbox && __instance.bridge.IsSandboxMode()) { return; }
         BTD6Rogue.mod.rogueTowers.Clear();
         foreach (string towerName in TowerUtil.towerNames) { BTD6Rogue.mod.rogueTowers.Add(towerName, new RogueTower()); }
         BTD6Rogue.mod.StartRogueGame(__instance);

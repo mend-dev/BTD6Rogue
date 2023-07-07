@@ -1,4 +1,5 @@
-﻿using BTD_Mod_Helper.Extensions;
+﻿using BTD_Mod_Helper;
+using BTD_Mod_Helper.Extensions;
 using Il2CppAssets.Scripts.Models.Towers;
 using Il2CppAssets.Scripts.Unity;
 using System;
@@ -27,13 +28,20 @@ public static class TowerUtil {
 
         for (int i = 0; i < 3; i++) {
             TowerModel newTower = GetTower(maxPath, waterMap);
-            while (towerModels.Contains(newTower)) {
+            while (towerModels.Contains(newTower) || DuplicatePath(newTower)) {
                 newTower = GetTower(maxPath, waterMap);
             }
             towerModels.Add(newTower);
         }
 
         return towerModels.ToArray();
+    }
+
+    public static bool DuplicatePath(TowerModel tower) {
+        if (tower.GetUpgradeLevel(0) >= 1 && BTD6Rogue.mod.rogueTowers[tower.baseId].top) { return true; }
+        if (tower.GetUpgradeLevel(1) >= 1 && BTD6Rogue.mod.rogueTowers[tower.baseId].mid) { return true; }
+        if (tower.GetUpgradeLevel(2) >= 1 && BTD6Rogue.mod.rogueTowers[tower.baseId].bot) { return true; }
+        return false;
     }
 
     public static TowerModel GetTower(int maxPath, bool waterMap) {
@@ -72,7 +80,7 @@ public static class TowerUtil {
 
         for (int i = 0; i < 3; i++) {
             TowerModel newTower = GetHero();
-            while (towerModels.Contains(newTower) || (newTower.baseId == "AdmiralBrickell") && waterMap) {
+            while (towerModels.Contains(newTower) || (newTower.baseId == "AdmiralBrickell" && waterMap) || BTD6Rogue.mod.selectedHeroes.Contains(newTower.baseId)) {
                 newTower = GetHero();
             }
             towerModels.Add(newTower);
@@ -145,6 +153,78 @@ public static class TowerUtil {
         }
         return 3 + baseCount;
     }
+
+    public static readonly Dictionary<string, float> mapLengths = new Dictionary<string, float> {
+        ["Tutorial"] = 32.75f, // Monkey Meadow
+        ["TreeStump"] = 44.27f,
+        ["TownCenter"] = 34.65f,
+        ["MiddleOfTheRoad"] = 45.2f,
+        ["OneTwoTree"] = 43,
+        ["Scrapyard"] = 60.73f,
+        ["TheCabin"] = 34.47f,
+        ["Resort"] = 54.33f,
+        ["Skates"] = 42.98f,
+        ["LotusIsland"] = 37.2f,
+        ["CandyFalls"] = 47.92f,
+        ["WinterPark"] = 41.05f,
+        ["Carved"] = 44.67f,
+        ["ParkPath"] = 40.22f,
+        ["AlpineRun"] = 36.55f,
+        ["FrozenOver"] = 40.37f,
+        ["InTheLoop"] = 44.39f,
+        ["Cubism"] = 49.22f,
+        ["FourCircles"] = 41.42f,
+        ["Hedge"] = 43.78f,
+        ["EndOfTheRoad"] = 30.05f,
+        ["Logs"] = 60.33f,
+        ["Polyphemus"] = 21.94f,
+        ["CoveredGarden"] = 19.7f,
+        ["Quarry"] = 37.4f,
+        ["QuietStreet"] = 28.89f,
+        ["BloonariusPrime"] = 19.64f,
+        ["Balance"] = 27.17f,
+        ["Encrypted"] = 32.77f,
+        ["Bazaar"] = 23.18f,
+        ["AdorasTemple"] = 31.6f,
+        ["SpringSpring"] = 28,
+        ["KartsNDarts"] = 37.14f,
+        ["MoonLanding"] = 40.37f,
+        ["Haunted"] = 21.14f,
+        ["Downstream"] = 29.97f,
+        ["FiringRange"] = 33.67f,
+        ["Cracked"] = 37.77f,
+        ["Streambed"] = 30.8f,
+        ["Chutes"] = 17.21f,
+        ["Rake"] = 17.75f,
+        ["SpiceIslands"] = 27.1f,
+        ["Erosion"] = 6.41f,
+        ["MidnightMansion"] = 19,
+        ["SunkenColumns"] = 18.8f,
+        ["XFactor"] = 17.38f,
+        ["Mesa"] = 12.49f,
+        ["Geared"] = 15.79f,
+        ["Spillway"] = 25.3f,
+        ["Cargo"] = 13.45f,
+        ["PatsPond"] = 15.6f,
+        ["Peninsula"] = 16.16f,
+        ["HighFinance"] = 17.63f,
+        ["AnotherBrick"] = 22.31f,
+        ["OffTheCoast"] = 21.97f,
+        ["Cornfield"] = 27.39f,
+        ["Underground"] = 14.44f,
+        ["DarkDungeons"] = 11.72f,
+        ["Sanctuary"] = 12.42f,
+        ["Ravine"] = 9.01f,
+        ["FloodedValley"] = 10.12f,
+        ["Infernal"] = 21.95f,
+        ["BloodyPuddles"] = 10.1f,
+        ["Workshop"] = 6.71f,
+        ["Quad"] = 12.68f,
+        ["Dark Castle"] = 10.39f,
+        ["Muddy Puddles"] = 10.87f,
+        ["#ouch"] = 4.52f,
+        ["Blons"] = 4.22f,
+    };
 
     public static readonly List<string> waterMaps = new List<string> {
         "TownCentre",
