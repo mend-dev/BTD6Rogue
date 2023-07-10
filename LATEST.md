@@ -1,15 +1,11 @@
-Version 1.0:
+Version 1.1:
 
 NEW FEATURES:
-- Bloonarius Boss
-- Better UI
-- Better difficulty scaling (Early/Late game was too hard, Mid game was too easy)
-- Multiple difficulty options
-- Better Code
-- Various Bug Fixes
-
-Upcoming in Version 1.1:
+- Changes in Round Scaling
+- No Hero XP Split
 - Vortex Boss
+
+Upcoming in Version 1.2+:
 - Lych Boss
 - Dreadbloon Boss
 - Difficulties effecting costs

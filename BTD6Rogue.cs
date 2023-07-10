@@ -36,6 +36,7 @@ public class BTD6Rogue : BloonsTD6Mod {
 
     public int towerCount = 0;
     public bool uiOpen = false;
+    public float previousIncrease = 0;
 
     #region Mod Settings
     public static readonly ModSettingHotkey FasterForwardHotkey = new(KeyCode.F1); // Doesn't Work
@@ -100,15 +101,15 @@ public class BTD6Rogue : BloonsTD6Mod {
     public override void OnUpdate() {
         base.OnUpdate();
 
-        if (Input.GetKeyDown(KeyCode.Keypad0)) {
-            overrideBoss = "RogueBloonarius";
-        } else if (Input.GetKeyDown(KeyCode.Keypad1)) {
-            overrideBoss = "RogueDreadbloon";
-        } else if (Input.GetKeyDown(KeyCode.Keypad2)) {
-            overrideBoss = "RogueLych";
-        } else if (Input.GetKeyDown(KeyCode.Keypad3)) {
-            overrideBoss = "RogueVortex";
-        }
+        //if (Input.GetKeyDown(KeyCode.Keypad0)) {
+        //    overrideBoss = "RogueBloonarius";
+        //} else if (Input.GetKeyDown(KeyCode.Keypad1)) {
+        //    overrideBoss = "RogueDreadbloon";
+        //} else if (Input.GetKeyDown(KeyCode.Keypad2)) {
+        //    overrideBoss = "RogueLych";
+        //} else if (Input.GetKeyDown(KeyCode.Keypad3)) {
+        //    overrideBoss = "RogueVortex";
+        //}
     }
 
     public void StartRogueGame(InGame __instance) {

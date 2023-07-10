@@ -1,13 +1,8 @@
-﻿using BTD_Mod_Helper;
-using BTD_Mod_Helper.Api.Bloons;
-using BTD_Mod_Helper.Api.Enums;
+﻿using BTD_Mod_Helper.Api.Bloons;
 using BTD_Mod_Helper.Extensions;
-using Il2Cpp;
-using Il2CppAssets.Scripts.Models;
 using Il2CppAssets.Scripts.Models.Bloons;
 using Il2CppAssets.Scripts.Models.Bloons.Behaviors;
 using Il2CppAssets.Scripts.Models.Bloons.Behaviors.Actions;
-using Il2CppNewtonsoft.Json;
 
 namespace BTD6Rogue;
 

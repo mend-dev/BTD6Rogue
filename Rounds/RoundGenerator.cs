@@ -23,8 +23,9 @@ public class RoundGenerator {
         int bloonGroups = new Random().Next(4) + 3;
         int mincrease = 0;
 
-        int bossInt = new Random().Next(4);
+        int bossInt = new Random().Next(2);
         string bossId = BTD6Rogue.mod.overrideBoss;
+        if (bossInt == 1) { bossId = "RogueVortex"; }
         //if (bossInt == 1) { bossId = "RogueDreadbloon"; } else if (bossInt == 2) { bossId = "RogueLych"; } else if (bossInt == 3) { bossId = "RogueVortex"; }
         if (round + 1 == 20) {
             roundModel.AddBloonGroup("BTD6Rogue-" + bossId + "1", 1, 0, 0);
