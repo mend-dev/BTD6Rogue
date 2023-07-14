@@ -56,11 +56,11 @@ public class DifficultyChoicePanel : MonoBehaviour {
         };
 
         List<string> difficultyIcons = new List<string>() {
-            VanillaSprites.ModeSelectEasyBtn,
-            VanillaSprites.ModeSelectEasyBtn,
-            VanillaSprites.ModeSelectMediumBtn,
-            VanillaSprites.ModeSelectHardBtn,
-            VanillaSprites.ImpoppableBtn,
+            VanillaSprites.Red,
+            VanillaSprites.Pink,
+            VanillaSprites.Rainbow,
+            VanillaSprites.Moab,
+            VanillaSprites.Bad,
         };
 
         ModHelperText infoText = inset.AddText(new Info("Title", 0, 400, 500, 500), "Difficulty", 96);

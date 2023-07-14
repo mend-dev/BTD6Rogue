@@ -1,14 +1,22 @@
-Version 1.1:
+Version 1.3:
 
 NEW FEATURES:
-- Changes in Round Scaling
-- No Hero XP Split
-- Vortex Boss
-
-Upcoming in Version 1.2+:
 - Lych Boss
+- Fixed the dumb bug where same tower in a choice messes which upgrades you get
+- Removed the scuffed "10 mil" upgrade in favor of actually locking upgrades
+- Changed the difficulty icons
+- Nerfed Early Game
+- Buffed mid-late game
+
+Upcoming in Version 1.4+:
 - Dreadbloon Boss
 - Difficulties effecting costs
+- Mod settings
+- Modifiers
+- Artifacts
+- Banana Farmer, Pontoon, and Portable Lake as towers you can get
+
+
 
 General Disclaimer:
 

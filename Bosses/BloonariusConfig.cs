@@ -11,10 +11,10 @@ public static class BloonariusConfig {
 
     // General Stats
     public static readonly float baseMaxHealth = 7500f;
-    public static readonly float levelMaxHealthMultiplier = 2f;
+    public static readonly float levelMaxHealthMultiplier = 3f;
 
-    public static readonly float baseSpeed = 0.8f;
-    public static readonly float levelSpeedAddition = 0f;
+    public static readonly float baseSpeed = 1.2f;
+    public static readonly float levelSpeedAddition = 0.1f;
 
     // Difficulty Multiplier
     public static readonly Dictionary<string, float> difficultyMultipliers = new Dictionary<string, float>() {
@@ -27,7 +27,7 @@ public static class BloonariusConfig {
 
     // Strong Spawn
     public static readonly int baseStrongSpawnCount = 30;
-    public static readonly float levelStrongSpawnCountAddition = -5;
+    public static readonly float levelStrongSpawnCountAddition = -4;
     public static readonly int baseStrongSpawnDistAhead = 40;
     public static readonly float levelStrongSpawnDistAheadAddition = 0;
     public static readonly List<string> strongSpawnBloons = new List<string>() {
@@ -41,7 +41,7 @@ public static class BloonariusConfig {
 
     // Weak Spawn
     public static readonly int baseWeakSpawnCount = 30;
-    public static readonly float levelWeakSpawnCountAddition = -10;
+    public static readonly float levelWeakSpawnCountAddition = -5;
     public static readonly float baseWeakSpawnTrackMax = 0.4f;
     public static readonly float levelWeakSpawnTrackMaxAddition = 0;
     public static readonly float baseWeakSpawnTrackMin = 0.1f;
@@ -56,8 +56,8 @@ public static class BloonariusConfig {
     };
 
     // Bloon Bleed
-    public static readonly int baseBleedSpawnCount = 10;
-    public static readonly float levelBleedSpawnCountAddition = 0;
+    public static readonly int baseBleedSpawnCount = 15;
+    public static readonly float levelBleedSpawnCountAddition = 5;
     public static readonly float baseBleedSpawnTrackMax = 0.4f;
     public static readonly float levelBleedSpawnTrackMaxAddition = 0;
     public static readonly float baseBLeedSpawnTrackMin = 0.1f;

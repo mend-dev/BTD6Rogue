@@ -9,11 +9,11 @@ namespace BTD6Rogue;
 public static class VortexConfig {
 
     // General Stats
-    public static readonly float baseMaxHealth = 8000f;
-    public static readonly float levelMaxHealthMultiplier = 2f;
+    public static readonly float baseMaxHealth = 6000f;
+    public static readonly float levelMaxHealthMultiplier = 3f;
 
-    public static readonly float baseSpeed = 3f;
-    public static readonly float levelSpeedAddition = 0.1f;
+    public static readonly float baseSpeed = 2.75f;
+    public static readonly float levelSpeedAddition = 0.25f;
 
     // Difficulty Multiplier
     public static readonly Dictionary<string, float> difficultyMultipliers = new Dictionary<string, float>() {
@@ -31,7 +31,7 @@ public static class VortexConfig {
     public static readonly float levelStunDurationAddition = 2f;
 
     // Set Speed Percent Action Model
-    public static readonly float baseBackupDistance = -100f;
+    public static readonly float baseBackupDistance = -125f;
     public static readonly float levelBackupDistanceAddition = 10f;
 
     // Destroy Projectiles in Radius Action Model

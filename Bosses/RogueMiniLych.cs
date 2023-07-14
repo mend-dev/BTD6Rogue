@@ -1,0 +1,35 @@
+﻿using BTD_Mod_Helper.Api.Bloons;
+using Il2CppAssets.Scripts.Models.Bloons;
+
+namespace BTD6Rogue;
+
+public class PoppableRogueMiniLych1 : ModBloon { public override string BaseBloon => "MiniLych1"; public override void ModifyBaseBloonModel(BloonModel bloonModel) { MiniLychConfig.ApplyMiniLychSettings(bloonModel, "Poppable", 0); } }
+public class PoppableRogueMiniLych2 : ModBloon { public override string BaseBloon => "MiniLych1"; public override void ModifyBaseBloonModel(BloonModel bloonModel) { MiniLychConfig.ApplyMiniLychSettings(bloonModel, "Poppable", 1); } }
+public class PoppableRogueMiniLych3 : ModBloon { public override string BaseBloon => "MiniLych2"; public override void ModifyBaseBloonModel(BloonModel bloonModel) { MiniLychConfig.ApplyMiniLychSettings(bloonModel, "Poppable", 2); } }
+public class PoppableRogueMiniLych4 : ModBloon { public override string BaseBloon => "MiniLych3"; public override void ModifyBaseBloonModel(BloonModel bloonModel) { MiniLychConfig.ApplyMiniLychSettings(bloonModel, "Poppable", 3); } }
+public class PoppableRogueMiniLych5 : ModBloon { public override string BaseBloon => "MiniLych4"; public override void ModifyBaseBloonModel(BloonModel bloonModel) { MiniLychConfig.ApplyMiniLychSettings(bloonModel, "Poppable", 4); } }
+public class PoppableRogueMiniLych6 : ModBloon { public override string BaseBloon => "MiniLych5"; public override void ModifyBaseBloonModel(BloonModel bloonModel) { MiniLychConfig.ApplyMiniLychSettings(bloonModel, "Poppable", 5); } }
+public class EasyRogueMiniLych1 : ModBloon { public override string BaseBloon => "MiniLych1"; public override void ModifyBaseBloonModel(BloonModel bloonModel) { MiniLychConfig.ApplyMiniLychSettings(bloonModel, "Easy", 0); } }
+public class EasyRogueMiniLych2 : ModBloon { public override string BaseBloon => "MiniLych1"; public override void ModifyBaseBloonModel(BloonModel bloonModel) { MiniLychConfig.ApplyMiniLychSettings(bloonModel, "Easy", 1); } }
+public class EasyRogueMiniLych3 : ModBloon { public override string BaseBloon => "MiniLych2"; public override void ModifyBaseBloonModel(BloonModel bloonModel) { MiniLychConfig.ApplyMiniLychSettings(bloonModel, "Easy", 2); } }
+public class EasyRogueMiniLych4 : ModBloon { public override string BaseBloon => "MiniLych3"; public override void ModifyBaseBloonModel(BloonModel bloonModel) { MiniLychConfig.ApplyMiniLychSettings(bloonModel, "Easy", 3); } }
+public class EasyRogueMiniLych5 : ModBloon { public override string BaseBloon => "MiniLych4"; public override void ModifyBaseBloonModel(BloonModel bloonModel) { MiniLychConfig.ApplyMiniLychSettings(bloonModel, "Easy", 4); } }
+public class EasyRogueMiniLych6 : ModBloon { public override string BaseBloon => "MiniLych5"; public override void ModifyBaseBloonModel(BloonModel bloonModel) { MiniLychConfig.ApplyMiniLychSettings(bloonModel, "Easy", 5); } }
+public class MediumRogueMiniLych1 : ModBloon { public override string BaseBloon => "MiniLych1"; public override void ModifyBaseBloonModel(BloonModel bloonModel) { MiniLychConfig.ApplyMiniLychSettings(bloonModel, "Medium", 0); } }
+public class MediumRogueMiniLych2 : ModBloon { public override string BaseBloon => "MiniLych1"; public override void ModifyBaseBloonModel(BloonModel bloonModel) { MiniLychConfig.ApplyMiniLychSettings(bloonModel, "Medium", 1); } }
+public class MediumRogueMiniLych3 : ModBloon { public override string BaseBloon => "MiniLych2"; public override void ModifyBaseBloonModel(BloonModel bloonModel) { MiniLychConfig.ApplyMiniLychSettings(bloonModel, "Medium", 2); } }
+public class MediumRogueMiniLych4 : ModBloon { public override string BaseBloon => "MiniLych3"; public override void ModifyBaseBloonModel(BloonModel bloonModel) { MiniLychConfig.ApplyMiniLychSettings(bloonModel, "Medium", 3); } }
+public class MediumRogueMiniLych5 : ModBloon { public override string BaseBloon => "MiniLych4"; public override void ModifyBaseBloonModel(BloonModel bloonModel) { MiniLychConfig.ApplyMiniLychSettings(bloonModel, "Medium", 4); } }
+public class MediumRogueMiniLych6 : ModBloon { public override string BaseBloon => "MiniLych5"; public override void ModifyBaseBloonModel(BloonModel bloonModel) { MiniLychConfig.ApplyMiniLychSettings(bloonModel, "Medium", 5); } }
+public class HardRogueMiniLych1 : ModBloon { public override string BaseBloon => "MiniLych1"; public override void ModifyBaseBloonModel(BloonModel bloonModel) { MiniLychConfig.ApplyMiniLychSettings(bloonModel, "Hard", 0); } }
+public class HardRogueMiniLych2 : ModBloon { public override string BaseBloon => "MiniLych1"; public override void ModifyBaseBloonModel(BloonModel bloonModel) { MiniLychConfig.ApplyMiniLychSettings(bloonModel, "Hard", 1); } }
+public class HardRogueMiniLych3 : ModBloon { public override string BaseBloon => "MiniLych2"; public override void ModifyBaseBloonModel(BloonModel bloonModel) { MiniLychConfig.ApplyMiniLychSettings(bloonModel, "Hard", 2); } }
+public class HardRogueMiniLych4 : ModBloon { public override string BaseBloon => "MiniLych3"; public override void ModifyBaseBloonModel(BloonModel bloonModel) { MiniLychConfig.ApplyMiniLychSettings(bloonModel, "Hard", 3); } }
+public class HardRogueMiniLych5 : ModBloon { public override string BaseBloon => "MiniLych4"; public override void ModifyBaseBloonModel(BloonModel bloonModel) { MiniLychConfig.ApplyMiniLychSettings(bloonModel, "Hard", 4); } }
+public class HardRogueMiniLych6 : ModBloon { public override string BaseBloon => "MiniLych5"; public override void ModifyBaseBloonModel(BloonModel bloonModel) { MiniLychConfig.ApplyMiniLychSettings(bloonModel, "Hard", 5); } }
+public class ImpoppableRogueMiniLych1 : ModBloon { public override string BaseBloon => "MiniLych1"; public override void ModifyBaseBloonModel(BloonModel bloonModel) { MiniLychConfig.ApplyMiniLychSettings(bloonModel, "Impoppable", 0); } }
+public class ImpoppableRogueMiniLych2 : ModBloon { public override string BaseBloon => "MiniLych1"; public override void ModifyBaseBloonModel(BloonModel bloonModel) { MiniLychConfig.ApplyMiniLychSettings(bloonModel, "Impoppable", 1); } }
+public class ImpoppableRogueMiniLych3 : ModBloon { public override string BaseBloon => "MiniLych2"; public override void ModifyBaseBloonModel(BloonModel bloonModel) { MiniLychConfig.ApplyMiniLychSettings(bloonModel, "Impoppable", 2); } }
+public class ImpoppableRogueMiniLych4 : ModBloon { public override string BaseBloon => "MiniLych3"; public override void ModifyBaseBloonModel(BloonModel bloonModel) { MiniLychConfig.ApplyMiniLychSettings(bloonModel, "Impoppable", 3); } }
+public class ImpoppableRogueMiniLych5 : ModBloon { public override string BaseBloon => "MiniLych4"; public override void ModifyBaseBloonModel(BloonModel bloonModel) { MiniLychConfig.ApplyMiniLychSettings(bloonModel, "Impoppable", 4); } }
+public class ImpoppableRogueMiniLych6 : ModBloon { public override string BaseBloon => "MiniLych5"; public override void ModifyBaseBloonModel(BloonModel bloonModel) { MiniLychConfig.ApplyMiniLychSettings(bloonModel, "Impoppable", 5); } }
