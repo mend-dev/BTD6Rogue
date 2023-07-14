@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using BTD_Mod_Helper;
 using BTD_Mod_Helper.Api.Components;
 using BTD_Mod_Helper.Api.Enums;
 using BTD_Mod_Helper.Extensions;
@@ -7,6 +8,7 @@ using Il2CppAssets.Scripts.Models.Towers;
 using Il2CppAssets.Scripts.Models.TowerSets;
 using Il2CppAssets.Scripts.Simulation.Input;
 using Il2CppAssets.Scripts.Simulation.Towers;
+using Il2CppAssets.Scripts.Unity;
 using Il2CppAssets.Scripts.Unity.UI_New.InGame;
 using Il2CppAssets.Scripts.Unity.UI_New.InGame.RightMenu.Powers;
 using MelonLoader;
@@ -25,9 +27,10 @@ public class TowerChoicePanel : MonoBehaviour {
 
     public TowerChoicePanel(IntPtr ptr) : base(ptr) { }
 
-    public void ChooseTower(string towerStr) {
+    public void ChooseTower(string towerName) {
         TowerInventory towerInventory = __instance.GetTowerInventory();
-        int tower = Array.IndexOf(towerChoices, towerStr);
+        int tower = Array.IndexOf(towerChoices, towerName);
+        string towerStr = Game.instance.model.GetTowerWithName(towerName).baseId;
         towerInventory.towerMaxes[towerStr] += towerAmounts[tower];
 
         if (towerPaths[tower] == "top") {
@@ -42,23 +45,6 @@ public class TowerChoicePanel : MonoBehaviour {
         }
 
         __instance.bridge.OnTowerInventoryChangedSim(true);
-
-        foreach (Tower ttower in __instance.GetTowers()) {
-            if (!TowerUtil.towerNames.Contains(ttower.towerModel.baseId)) { continue; }
-
-            for (int i = 0; i < 3; i++) {
-                int maxPath = 0;
-                if (i == 0) { maxPath = BTD6Rogue.mod.rogueTowers[ttower.towerModel.baseId].maxTopPath; }
-                if (i == 1) { maxPath = BTD6Rogue.mod.rogueTowers[ttower.towerModel.baseId].maxMidPath; }
-                if (i == 2) { maxPath = BTD6Rogue.mod.rogueTowers[ttower.towerModel.baseId].maxBotPath; }
-
-                if (ttower.GetUpgrade(i) != null && ttower.GetUpgrade(i).tier >= maxPath) { ttower.GetUpgrade(i).cost = 9999999; } else if (ttower.GetUpgrade(i) != null) {
-                    if (ttower.towerModel != null && ttower.towerModel.GetUpgrade(i, ttower.GetUpgrade(i).tier) != null) {
-                        ttower.GetUpgrade(i).cost = ttower.towerModel.GetUpgrade(i, ttower.GetUpgrade(i).tier + 1).cost;
-                    }
-                }
-            }
-        }
         __instance.bridge.SetAutoPlay(true);
         Destroy(gameObject);
     }
@@ -77,13 +63,13 @@ public class TowerChoicePanel : MonoBehaviour {
 
         for (int i = 0; i < towerModels.Length; i++) {
             TowerModel tower = towerModels[i];
-            towerChoicePanel.towerChoices[i] = tower.baseId;
+            towerChoicePanel.towerChoices[i] = tower.GetTowerId();
             if (tower.GetUpgradeLevel(0) >= 1) { towerChoicePanel.towerPaths[i] = "top"; BTD6Rogue.mod.rogueTowers[tower.baseId].top = true; }
             if (tower.GetUpgradeLevel(1) >= 1) { towerChoicePanel.towerPaths[i] = "mid"; BTD6Rogue.mod.rogueTowers[tower.baseId].mid = true; }
             if (tower.GetUpgradeLevel(2) >= 1) { towerChoicePanel.towerPaths[i] = "bot"; BTD6Rogue.mod.rogueTowers[tower.baseId].bot = true; }
             towerChoicePanel.towerAmounts[i] = TowerUtil.GetTowerCount(tower);
 
-            ModHelperButton towerButton = inset.AddButton(new Info("Tower Button", xPos[i], -100, 650), VanillaSprites.GreenBtn, new Action(() => towerChoicePanel.ChooseTower(tower.baseId)));
+            ModHelperButton towerButton = inset.AddButton(new Info("Tower Button", xPos[i], -100, 650), VanillaSprites.GreenBtn, new Action(() => towerChoicePanel.ChooseTower(tower.GetTowerId())));
             towerButton.AddImage(new Info("Image") { AnchorMin = new Vector2(0, 0), AnchorMax = new Vector2(1, 1), Size = 50 }, tower.portrait.GetGUID());
             ModHelperText towerName = towerButton.AddText(new Info("Tower Name", 0, -225, 650, 76), tower.name, 64);
             ModHelperText amountText = towerButton.AddText(new Info("Tower Amount", 225, 225, 500, 500), towerChoicePanel.towerAmounts[i].ToString(), 110);

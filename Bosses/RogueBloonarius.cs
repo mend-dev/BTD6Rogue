@@ -1,174 +1,36 @@
 ﻿using BTD_Mod_Helper.Api.Bloons;
-using BTD_Mod_Helper.Api.Enums;
-using BTD_Mod_Helper.Extensions;
 using Il2CppAssets.Scripts.Models.Bloons;
-using Il2CppAssets.Scripts.Models.Bloons.Behaviors;
 
 namespace BTD6Rogue;
 
-public class RogueBloonarius1 : ModBloon {
-    public override string BaseBloon => "Bloonarius1";
-    public override void ModifyBaseBloonModel(BloonModel bloonModel) {
-        bloonModel.maxHealth = 7500;
-        bloonModel.leakDamage = 99999f;
-        bloonModel.speed = 0.75f;
-        bloonModel.Speed = 0.75f;
-        foreach (SpawnBloonsActionModel sbam in bloonModel.GetBehaviors<SpawnBloonsActionModel>()) {
-            if (sbam.actionId == "StrongSpawn") {
-                sbam.bloonType = BloonType.Yellow;
-                sbam.spawnCount = 30;
-                sbam.spawnDistAhead = 40;
-            } else if (sbam.actionId == "WeakSpawn") {
-                sbam.bloonType = BloonType.Green;
-                sbam.spawnCount = 60;
-                sbam.spawnTrackMax = 0.4f;
-                sbam.spawnTrackMin = 0.1f;
-            } else if (sbam.actionId == "WeakerSpawn") {
-                sbam.bloonType = BloonType.Blue;
-                sbam.spawnCount = 10;
-                sbam.spawnTrackMax = 0.4f;
-                sbam.spawnTrackMin = 0.1f;
-            }
-        }
-    }
-}
+public class PoppableRogueBloonarius1 : ModBloon { public override string BaseBloon => "Bloonarius1"; public override void ModifyBaseBloonModel(BloonModel bloonModel) { BloonariusConfig.ApplyBloonariusSettings(bloonModel, "Poppable", 0); } }
+public class PoppableRogueBloonarius2 : ModBloon { public override string BaseBloon => "Bloonarius1"; public override void ModifyBaseBloonModel(BloonModel bloonModel) { BloonariusConfig.ApplyBloonariusSettings(bloonModel, "Poppable", 1); } }
+public class PoppableRogueBloonarius3 : ModBloon { public override string BaseBloon => "Bloonarius2"; public override void ModifyBaseBloonModel(BloonModel bloonModel) { BloonariusConfig.ApplyBloonariusSettings(bloonModel, "Poppable", 2); } }
+public class PoppableRogueBloonarius4 : ModBloon { public override string BaseBloon => "Bloonarius3"; public override void ModifyBaseBloonModel(BloonModel bloonModel) { BloonariusConfig.ApplyBloonariusSettings(bloonModel, "Poppable", 3); } }
+public class PoppableRogueBloonarius5 : ModBloon { public override string BaseBloon => "Bloonarius4"; public override void ModifyBaseBloonModel(BloonModel bloonModel) { BloonariusConfig.ApplyBloonariusSettings(bloonModel, "Poppable", 4); } }
+public class PoppableRogueBloonarius6 : ModBloon { public override string BaseBloon => "Bloonarius5"; public override void ModifyBaseBloonModel(BloonModel bloonModel) { BloonariusConfig.ApplyBloonariusSettings(bloonModel, "Poppable", 5); } }
+public class EasyRogueBloonarius1 : ModBloon { public override string BaseBloon => "Bloonarius1"; public override void ModifyBaseBloonModel(BloonModel bloonModel) { BloonariusConfig.ApplyBloonariusSettings(bloonModel, "Easy", 0); } }
+public class EasyRogueBloonarius2 : ModBloon { public override string BaseBloon => "Bloonarius1"; public override void ModifyBaseBloonModel(BloonModel bloonModel) { BloonariusConfig.ApplyBloonariusSettings(bloonModel, "Easy", 1); } }
+public class EasyRogueBloonarius3 : ModBloon { public override string BaseBloon => "Bloonarius2"; public override void ModifyBaseBloonModel(BloonModel bloonModel) { BloonariusConfig.ApplyBloonariusSettings(bloonModel, "Easy", 2); } }
+public class EasyRogueBloonarius4 : ModBloon { public override string BaseBloon => "Bloonarius3"; public override void ModifyBaseBloonModel(BloonModel bloonModel) { BloonariusConfig.ApplyBloonariusSettings(bloonModel, "Easy", 3); } }
+public class EasyRogueBloonarius5 : ModBloon { public override string BaseBloon => "Bloonarius4"; public override void ModifyBaseBloonModel(BloonModel bloonModel) { BloonariusConfig.ApplyBloonariusSettings(bloonModel, "Easy", 4); } }
+public class EasyRogueBloonarius6 : ModBloon { public override string BaseBloon => "Bloonarius5"; public override void ModifyBaseBloonModel(BloonModel bloonModel) { BloonariusConfig.ApplyBloonariusSettings(bloonModel, "Easy", 5); } }
+public class MediumRogueBloonarius1 : ModBloon { public override string BaseBloon => "Bloonarius1"; public override void ModifyBaseBloonModel(BloonModel bloonModel) { BloonariusConfig.ApplyBloonariusSettings(bloonModel, "Medium", 0); } }
+public class MediumRogueBloonarius2 : ModBloon { public override string BaseBloon => "Bloonarius1"; public override void ModifyBaseBloonModel(BloonModel bloonModel) { BloonariusConfig.ApplyBloonariusSettings(bloonModel, "Medium", 1); } }
+public class MediumRogueBloonarius3 : ModBloon { public override string BaseBloon => "Bloonarius2"; public override void ModifyBaseBloonModel(BloonModel bloonModel) { BloonariusConfig.ApplyBloonariusSettings(bloonModel, "Medium", 2); } }
+public class MediumRogueBloonarius4 : ModBloon { public override string BaseBloon => "Bloonarius3"; public override void ModifyBaseBloonModel(BloonModel bloonModel) { BloonariusConfig.ApplyBloonariusSettings(bloonModel, "Medium", 3); } }
+public class MediumRogueBloonarius5 : ModBloon { public override string BaseBloon => "Bloonarius4"; public override void ModifyBaseBloonModel(BloonModel bloonModel) { BloonariusConfig.ApplyBloonariusSettings(bloonModel, "Medium", 4); } }
+public class MediumRogueBloonarius6 : ModBloon { public override string BaseBloon => "Bloonarius5"; public override void ModifyBaseBloonModel(BloonModel bloonModel) { BloonariusConfig.ApplyBloonariusSettings(bloonModel, "Medium", 5); } }
+public class HardRogueBloonarius1 : ModBloon { public override string BaseBloon => "Bloonarius1"; public override void ModifyBaseBloonModel(BloonModel bloonModel) { BloonariusConfig.ApplyBloonariusSettings(bloonModel, "Hard", 0); } }
+public class HardRogueBloonarius2 : ModBloon { public override string BaseBloon => "Bloonarius1"; public override void ModifyBaseBloonModel(BloonModel bloonModel) { BloonariusConfig.ApplyBloonariusSettings(bloonModel, "Hard", 1); } }
+public class HardRogueBloonarius3 : ModBloon { public override string BaseBloon => "Bloonarius2"; public override void ModifyBaseBloonModel(BloonModel bloonModel) { BloonariusConfig.ApplyBloonariusSettings(bloonModel, "Hard", 2); } }
+public class HardRogueBloonarius4 : ModBloon { public override string BaseBloon => "Bloonarius3"; public override void ModifyBaseBloonModel(BloonModel bloonModel) { BloonariusConfig.ApplyBloonariusSettings(bloonModel, "Hard", 3); } }
+public class HardRogueBloonarius5 : ModBloon { public override string BaseBloon => "Bloonarius4"; public override void ModifyBaseBloonModel(BloonModel bloonModel) { BloonariusConfig.ApplyBloonariusSettings(bloonModel, "Hard", 4); } }
+public class HardRogueBloonarius6 : ModBloon { public override string BaseBloon => "Bloonarius5"; public override void ModifyBaseBloonModel(BloonModel bloonModel) { BloonariusConfig.ApplyBloonariusSettings(bloonModel, "Hard", 5); } }
+public class ImpoppableRogueBloonarius1 : ModBloon { public override string BaseBloon => "Bloonarius1"; public override void ModifyBaseBloonModel(BloonModel bloonModel) { BloonariusConfig.ApplyBloonariusSettings(bloonModel, "Impoppable", 0); } }
+public class ImpoppableRogueBloonarius2 : ModBloon { public override string BaseBloon => "Bloonarius1"; public override void ModifyBaseBloonModel(BloonModel bloonModel) { BloonariusConfig.ApplyBloonariusSettings(bloonModel, "Impoppable", 1); } }
+public class ImpoppableRogueBloonarius3 : ModBloon { public override string BaseBloon => "Bloonarius2"; public override void ModifyBaseBloonModel(BloonModel bloonModel) { BloonariusConfig.ApplyBloonariusSettings(bloonModel, "Impoppable", 2); } }
+public class ImpoppableRogueBloonarius4 : ModBloon { public override string BaseBloon => "Bloonarius3"; public override void ModifyBaseBloonModel(BloonModel bloonModel) { BloonariusConfig.ApplyBloonariusSettings(bloonModel, "Impoppable", 3); } }
+public class ImpoppableRogueBloonarius5 : ModBloon { public override string BaseBloon => "Bloonarius4"; public override void ModifyBaseBloonModel(BloonModel bloonModel) { BloonariusConfig.ApplyBloonariusSettings(bloonModel, "Impoppable", 4); } }
+public class ImpoppableRogueBloonarius6 : ModBloon { public override string BaseBloon => "Bloonarius5"; public override void ModifyBaseBloonModel(BloonModel bloonModel) { BloonariusConfig.ApplyBloonariusSettings(bloonModel, "Impoppable", 5); } }
 
-public class RogueBloonarius2 : ModBloon {
-    public override string BaseBloon => "Bloonarius1";
-
-    public override void ModifyBaseBloonModel(BloonModel bloonModel) {
-        bloonModel.maxHealth = 15000;
-        bloonModel.leakDamage = 99999f;
-        bloonModel.speed = 0.75f;
-        bloonModel.Speed = 0.75f;
-        foreach (SpawnBloonsActionModel sbam in bloonModel.GetBehaviors<SpawnBloonsActionModel>()) {
-            if (sbam.actionId == "StrongSpawn") {
-                sbam.bloonType = BloonType.Zebra;
-                sbam.spawnCount = 25;
-                sbam.spawnDistAhead = 40;
-            } else if (sbam.actionId == "WeakSpawn") {
-                sbam.bloonType = BloonType.Pink;
-                sbam.spawnCount = 50;
-                sbam.spawnTrackMax = 0.4f;
-                sbam.spawnTrackMin = 0.1f;
-            } else if (sbam.actionId == "WeakerSpawn") {
-                sbam.bloonType = BloonType.Yellow;
-                sbam.spawnCount = 10;
-                sbam.spawnTrackMax = 0.4f;
-                sbam.spawnTrackMin = 0.1f;
-            }
-        }
-    }
-}
-
-public class RogueBloonarius3 : ModBloon {
-    public override string BaseBloon => "Bloonarius2";
-
-    public override void ModifyBaseBloonModel(BloonModel bloonModel) {
-        bloonModel.maxHealth = 30000;
-        bloonModel.leakDamage = 99999f;
-        bloonModel.speed = 0.75f;
-        bloonModel.Speed = 0.75f;
-        foreach (SpawnBloonsActionModel sbam in bloonModel.GetBehaviors<SpawnBloonsActionModel>()) {
-            if (sbam.actionId == "StrongSpawn") {
-                sbam.bloonType = BloonType.Rainbow;
-                sbam.spawnCount = 20;
-                sbam.spawnDistAhead = 40;
-            } else if (sbam.actionId == "WeakSpawn") {
-                sbam.bloonType = BloonType.Zebra;
-                sbam.spawnCount = 50;
-                sbam.spawnTrackMax = 0.4f;
-                sbam.spawnTrackMin = 0.1f;
-            } else if (sbam.actionId == "WeakerSpawn") {
-                sbam.bloonType = BloonType.Pink;
-                sbam.spawnCount = 10;
-                sbam.spawnTrackMax = 0.4f;
-                sbam.spawnTrackMin = 0.1f;
-            }
-        }
-    }
-}
-
-public class RogueBloonarius4 : ModBloon {
-    public override string BaseBloon => "Bloonarius3";
-
-    public override void ModifyBaseBloonModel(BloonModel bloonModel) {
-        bloonModel.maxHealth = 60000;
-        bloonModel.leakDamage = 99999f;
-        bloonModel.speed = 0.75f;
-        bloonModel.Speed = 0.75f;
-        foreach (SpawnBloonsActionModel sbam in bloonModel.GetBehaviors<SpawnBloonsActionModel>()) {
-            if (sbam.actionId == "StrongSpawn") {
-                sbam.bloonType = BloonType.Ceramic;
-                sbam.spawnCount = 20;
-                sbam.spawnDistAhead = 40;
-            } else if (sbam.actionId == "WeakSpawn") {
-                sbam.bloonType = BloonType.Rainbow;
-                sbam.spawnCount = 40;
-                sbam.spawnTrackMax = 0.4f;
-                sbam.spawnTrackMin = 0.1f;
-            } else if (sbam.actionId == "WeakerSpawn") {
-                sbam.bloonType = BloonType.Zebra;
-                sbam.spawnCount = 10;
-                sbam.spawnTrackMax = 0.4f;
-                sbam.spawnTrackMin = 0.1f;
-            }
-        }
-    }
-}
-
-public class RogueBloonarius5 : ModBloon {
-    public override string BaseBloon => "Bloonarius4";
-
-    public override void ModifyBaseBloonModel(BloonModel bloonModel) {
-        bloonModel.maxHealth = 120000;
-        bloonModel.leakDamage = 99999f;
-        bloonModel.speed = 0.75f;
-        bloonModel.Speed = 0.75f;
-        foreach (SpawnBloonsActionModel sbam in bloonModel.GetBehaviors<SpawnBloonsActionModel>()) {
-            if (sbam.actionId == "StrongSpawn") {
-                sbam.bloonType = BloonType.Moab;
-                sbam.spawnCount = 10;
-                sbam.spawnDistAhead = 40;
-            } else if (sbam.actionId == "WeakSpawn") {
-                sbam.bloonType = BloonType.Ceramic;
-                sbam.spawnCount = 20;
-                sbam.spawnTrackMax = 0.4f;
-                sbam.spawnTrackMin = 0.1f;
-            } else if (sbam.actionId == "WeakerSpawn") {
-                sbam.bloonType = BloonType.Rainbow;
-                sbam.spawnCount = 10;
-                sbam.spawnTrackMax = 0.4f;
-                sbam.spawnTrackMin = 0.1f;
-            }
-        }
-    }
-}
-
-public class RogueBloonarius6: ModBloon {
-    public override string BaseBloon => "Bloonarius5";
-
-    public override void ModifyBaseBloonModel(BloonModel bloonModel) {
-        bloonModel.maxHealth = 240000;
-        bloonModel.leakDamage = 99999f;
-        bloonModel.speed = 0.75f;
-        bloonModel.Speed = 0.75f;
-        foreach (SpawnBloonsActionModel sbam in bloonModel.GetBehaviors<SpawnBloonsActionModel>()) {
-            if (sbam.actionId == "StrongSpawn") {
-                sbam.bloonType = BloonType.Bfb;
-                sbam.spawnCount = 10;
-                sbam.spawnDistAhead = 40;
-            } else if (sbam.actionId == "WeakSpawn") {
-                sbam.bloonType = BloonType.Moab;
-                sbam.spawnCount = 20;
-                sbam.spawnTrackMax = 0.4f;
-                sbam.spawnTrackMin = 0.1f;
-            } else if (sbam.actionId == "WeakerSpawn") {
-                sbam.bloonType = BloonType.Ceramic;
-                sbam.spawnCount = 10;
-                sbam.spawnTrackMax = 0.4f;
-                sbam.spawnTrackMin = 0.1f;
-            }
-        }
-    }
-}

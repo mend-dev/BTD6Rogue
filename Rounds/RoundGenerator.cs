@@ -1,8 +1,6 @@
-﻿using BTD_Mod_Helper.Api.Enums;
-using BTD_Mod_Helper.Extensions;
+﻿using BTD_Mod_Helper.Extensions;
 using Il2CppAssets.Scripts.Models.Bloons;
 using Il2CppAssets.Scripts.Models.Rounds;
-using Il2CppAssets.Scripts.Simulation.Bloons;
 using Il2CppAssets.Scripts.Unity;
 using System;
 using System.Collections.Generic;
@@ -27,18 +25,19 @@ public class RoundGenerator {
         string bossId = BTD6Rogue.mod.overrideBoss;
         if (bossInt == 1) { bossId = "RogueVortex"; }
         //if (bossInt == 1) { bossId = "RogueDreadbloon"; } else if (bossInt == 2) { bossId = "RogueLych"; } else if (bossInt == 3) { bossId = "RogueVortex"; }
+
         if (round + 1 == 20) {
-            roundModel.AddBloonGroup("BTD6Rogue-" + bossId + "1", 1, 0, 0);
+            roundModel.AddBloonGroup("BTD6Rogue-" + BTD6Rogue.mod.difficulty.DifficultyName + bossId + "1", 1, 0, 0);
         } else if (round + 1 == 40) {
-            roundModel.AddBloonGroup("BTD6Rogue-" + bossId + "2", 1, 0, 0);
+            roundModel.AddBloonGroup("BTD6Rogue-" + BTD6Rogue.mod.difficulty.DifficultyName + bossId + "2", 1, 0, 0);
         } else if (round + 1 == 60) {
-            roundModel.AddBloonGroup("BTD6Rogue-" + bossId + "3", 1, 0, 0);
+            roundModel.AddBloonGroup("BTD6Rogue-" + BTD6Rogue.mod.difficulty.DifficultyName + bossId + "3", 1, 0, 0);
         } else if (round + 1 == 80) {
-            roundModel.AddBloonGroup("BTD6Rogue-" + bossId + "4", 1, 0, 0);
+            roundModel.AddBloonGroup("BTD6Rogue-" + BTD6Rogue.mod.difficulty.DifficultyName + bossId + "4", 1, 0, 0);
         } else if (round + 1 == 100) {
-            roundModel.AddBloonGroup("BTD6Rogue-" + bossId + "5", 1, 0, 0);
+            roundModel.AddBloonGroup("BTD6Rogue-" + BTD6Rogue.mod.difficulty.DifficultyName + bossId + "5", 1, 0, 0);
         } else if (round + 1 == 120) {
-            roundModel.AddBloonGroup("BTD6Rogue-" + bossId + "6", 1, 0, 0);
+            roundModel.AddBloonGroup("BTD6Rogue-" + BTD6Rogue.mod.difficulty.DifficultyName + bossId + "6", 1, 0, 0);
         }
 
         for (int i = 0; i < bloonGroups; i++) {
