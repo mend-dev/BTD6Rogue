@@ -4,16 +4,16 @@ using Il2CppAssets.Scripts.Models.Bloons.Behaviors;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace BTD6Rogue.Bosses.Lych;
+namespace BTD6Rogue;
 
 public static class LychConfig
 {
 
     // General Stats
-    public static readonly float baseMaxHealth = 5000f;
-    public static readonly float levelMaxHealthMultiplier = 1.5f;
+    public static readonly float baseMaxHealth = 6000;
+    public static readonly float levelMaxHealthMultiplier = 3;
 
-    public static readonly float baseSpeed = 1.2f;
+    public static readonly float baseSpeed = 1f;
     public static readonly float levelSpeedAddition = 0.1f;
 
     // Difficulty Multiplier

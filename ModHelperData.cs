@@ -2,7 +2,7 @@ namespace BTD6Rogue;
 
 public static class ModHelperData {
     public const string WorksOnVersion = "37.0";
-    public const string Version = "1.4.0";
+    public const string Version = "1.4.1";
 
     public const string Name = "BTD6Rogue";
     public const string Description =

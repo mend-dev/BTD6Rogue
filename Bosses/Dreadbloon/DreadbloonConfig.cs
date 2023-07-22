@@ -10,11 +10,11 @@ namespace BTD6Rogue;
 public static class DreadbloonConfig {
 
     // General Stats
-    public static readonly float baseMaxHealth = 250f;
-    public static readonly float levelMaxHealthMultiplier = 1.5f;
+    public static readonly float baseMaxHealth = 1000;
+    public static readonly float levelMaxHealthMultiplier = 3;
 
     public static readonly float baseSpeed = 1;
-    public static readonly float levelSpeedAddition = 0.1f;
+    public static readonly float levelSpeedAddition = 0.125f;
 
     // Difficulty Multiplier
     public static readonly Dictionary<string, float> difficultyMultipliers = new Dictionary<string, float>() {
@@ -27,19 +27,19 @@ public static class DreadbloonConfig {
 
     //
     public static readonly float baseDamageReduction = 0.5f;
-    public static readonly float levelDamageReductionAddition = 0;
+    public static readonly float levelDamageReductionAddition = 0.1f;
 
     //
-    public static readonly float baseArmorAmount = 250;
-    public static readonly float levelArmorAmountAddition = 0;
+    public static readonly float baseArmorAmount = 500;
+    public static readonly float levelArmorAmountMultiplier = 3;
     public static readonly float baseSpeedMultiplier = 1f;
     public static readonly float levelSpeedMultiplierAddition = 0;
 
     //
     public static readonly float baseInitialSpawnSize = 5;
-    public static readonly float levelInitialSpawnSizeAddition = 0;
+    public static readonly float levelInitialSpawnSizeAddition = 5;
     public static readonly float baseTimeBetweenSpawns = 10;
-    public static readonly float levelTimeBetweenSpawnsAddition = 0;
+    public static readonly float levelTimeBetweenSpawnsAddition = -1;
 
     public static void ApplyDreadbloonSettings(BloonModel bloonModel, string difficulty, int level) {
         float multiplier = difficultyMultipliers[difficulty];
@@ -56,8 +56,9 @@ public static class DreadbloonConfig {
         }
 
         foreach (GenerateArmourActionModel model in bloonModel.GetBehaviors<GenerateArmourActionModel>()) {
-            model.amount = (baseArmorAmount + levelArmorAmountAddition * level) * multiplier;
-            model.speedMultiplier = (levelArmorAmountAddition + levelSpeedMultiplierAddition * level) * multiplier;
+            model.amount = baseArmorAmount * (levelArmorAmountMultiplier * level) * multiplier;
+            if (level == 0) { model.amount = baseArmorAmount * multiplier; }
+            model.speedMultiplier = (levelSpeedMultiplierAddition + levelSpeedMultiplierAddition * level) * multiplier;
         }
 
         foreach (SpawnBloonsUntilArmourBreaksActionModel model in bloonModel.GetBehaviors<SpawnBloonsUntilArmourBreaksActionModel>()) {

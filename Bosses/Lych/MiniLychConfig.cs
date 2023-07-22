@@ -4,21 +4,19 @@ using System.Collections.Generic;
 using BTD_Mod_Helper.Extensions;
 using UnityEngine;
 
-namespace BTD6Rogue.Bosses.Lych;
+namespace BTD6Rogue;
 
-public static class MiniLychConfig
-{
+public static class MiniLychConfig {
 
     // General Stats
-    public static readonly float baseMaxHealth = 300;
-    public static readonly float levelMaxHealthMultiplier = 1.5f;
+    public static readonly float baseMaxHealth = 500;
+    public static readonly float levelMaxHealthMultiplier = 2;
 
     public static readonly float baseSpeed = 5;
-    public static readonly float levelSpeedAddition = 0f;
+    public static readonly float levelSpeedAddition = 1f;
 
     // Difficulty Multiplier
-    public static readonly Dictionary<string, float> difficultyMultipliers = new Dictionary<string, float>()
-    {
+    public static readonly Dictionary<string, float> difficultyMultipliers = new Dictionary<string, float>() {
         ["Poppable"] = 0.7f,
         ["Easy"] = 0.85f,
         ["Medium"] = 1f,
@@ -28,14 +26,13 @@ public static class MiniLychConfig
 
     // Time Trigger Model
     public static readonly float baseTimeInterval = 10;
-    public static readonly float levelTimeIntervalAddition = 0;
+    public static readonly float levelTimeIntervalAddition = -1;
 
     // Drain Lives Model
-    public static readonly float baseDrainLives = 1;
-    public static readonly float levelDrainLives = 0;
+    public static readonly float baseDrainLives = 2;
+    public static readonly float levelDrainLives = 1;
 
-    public static void ApplyMiniLychSettings(BloonModel bloonModel, string difficulty, int level)
-    {
+    public static void ApplyMiniLychSettings(BloonModel bloonModel, string difficulty, int level) {
         float multiplier = difficultyMultipliers[difficulty];
 
         bloonModel.maxHealth = baseMaxHealth * (levelMaxHealthMultiplier * level) * multiplier;
@@ -45,13 +42,11 @@ public static class MiniLychConfig
         bloonModel.speed = (baseSpeed + levelSpeedAddition * level) * multiplier;
         bloonModel.Speed = (baseSpeed + levelSpeedAddition * level) * multiplier;
 
-        foreach (TimeTriggerModel model in bloonModel.GetBehaviors<TimeTriggerModel>())
-        {
+        foreach (TimeTriggerModel model in bloonModel.GetBehaviors<TimeTriggerModel>()) {
             model.interval = (baseTimeInterval + levelTimeIntervalAddition * level) * multiplier;
         }
 
-        foreach (DrainLivesActionModel model in bloonModel.GetBehaviors<DrainLivesActionModel>())
-        {
+        foreach (DrainLivesActionModel model in bloonModel.GetBehaviors<DrainLivesActionModel>()) {
             model.livesDrained = Mathf.FloorToInt((baseDrainLives + levelDrainLives * level) * multiplier);
         }
     }

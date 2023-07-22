@@ -9,10 +9,10 @@ namespace BTD6Rogue;
 public static class VortexConfig {
 
     // General Stats
-    public static readonly float baseMaxHealth = 5000f;
-    public static readonly float levelMaxHealthMultiplier = 1.5f;
+    public static readonly float baseMaxHealth = 5000;
+    public static readonly float levelMaxHealthMultiplier = 3;
 
-    public static readonly float baseSpeed = 2.75f;
+    public static readonly float baseSpeed = 2.5f;
     public static readonly float levelSpeedAddition = 0.25f;
 
     // Difficulty Multiplier
@@ -25,18 +25,18 @@ public static class VortexConfig {
     };
 
     // Stun Towers in Radius Action Model
-    public static readonly float baseStunRadius = 40f;
-    public static readonly float levelStunRadiusAddition = 5f;
-    public static readonly float baseStunDuration = 10f;
-    public static readonly float levelStunDurationAddition = 2f;
+    public static readonly float baseStunRadius = 50f;
+    public static readonly float levelStunRadiusAddition = 3f;
+    public static readonly float baseStunDuration = 20f;
+    public static readonly float levelStunDurationAddition = 2.5f;
 
     // Set Speed Percent Action Model
-    public static readonly float baseBackupDistance = -125f;
+    public static readonly float baseBackupDistance = -100f;
     public static readonly float levelBackupDistanceAddition = 10f;
 
     // Destroy Projectiles in Radius Action Model
-    public static readonly float baseDestroyProjectileRadius = 43f;
-    public static readonly float levelDestroyProjectileRadiusAddition = 0.1f;
+    public static readonly float baseDestroyProjectileRadius = 40f;
+    public static readonly float levelDestroyProjectileRadiusAddition = 2f;
 
     // Reflect Projectiles in Radius Action Model
     public static readonly float baseReflectProjectileLifespan = 5f;
