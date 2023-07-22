@@ -17,6 +17,7 @@ namespace BTD6Rogue;
 public class InitialTowerChoicePanel : MonoBehaviour {
 
     public InGame __instance = null!;
+    public static InitialTowerChoicePanel uiPanel = null!;
     public RectTransform menu = null!;
 
     public InitialTowerChoicePanel(IntPtr ptr) : base(ptr) { }
@@ -27,26 +28,31 @@ public class InitialTowerChoicePanel : MonoBehaviour {
         towerInventory.towerMaxes[hero]++;
         __instance.bridge.OnTowerInventoryChangedSim(true);
 
-        if (__instance.GetMap().mapModel.mapDifficulty == 0 && BTD6Rogue.mod.towerCount < 1) { Create(__instance.uiRect, __instance);
-        } else if (__instance.GetMap().mapModel.mapDifficulty == 1 && BTD6Rogue.mod.towerCount < 2) { Create(__instance.uiRect, __instance);
-        } else if (__instance.GetMap().mapModel.mapDifficulty == 2 && BTD6Rogue.mod.towerCount < 3) { Create(__instance.uiRect, __instance);
-        } else if (__instance.GetMap().mapModel.mapDifficulty == 3 && BTD6Rogue.mod.towerCount < 4) { Create(__instance.uiRect, __instance); }
+        List<string> mapDifficulties = new List<string>() { "Beginner", "Intermediate", "Advanced", "Expert" };
+        string difficulty = mapDifficulties[__instance.GetMap().mapModel.mapDifficulty];
+        if (BTD6Rogue.mod.towerCount < DifficultyUtil.GetStartingTowerCount(difficulty, BTD6Rogue.mod.difficulty.DifficultyName)) {
+            Create(__instance.uiRect, __instance);
+        }
 
+        BTD6Rogue.mod.uiOpen = false;
+        uiPanel = null!;
         Destroy(gameObject);
     }
 
     public static InitialTowerChoicePanel Create(RectTransform menu, InGame __instance) {
+        BTD6Rogue.mod.uiOpen = true;
         var panel = menu.gameObject.AddModHelperPanel(new Info("ReforgePanel", 0, 0, 1600, 1080),
             VanillaSprites.BrownInsertPanel);
         var reforgePanel = panel.AddComponent<InitialTowerChoicePanel>();
         reforgePanel.menu = menu;
         reforgePanel.__instance = __instance;
+        uiPanel = reforgePanel!;
 
         var inset = panel.AddPanel(new Info("InnerPanel") {
             AnchorMin = new Vector2(0, 0), AnchorMax = new Vector2(1, 1), Size = -50
         }, VanillaSprites.BrownInsertPanelDark);
 
-        string[] heroes = TowerUtil.towerNames.ToArray();
+        string[] heroes = TowerUtil.GetAllTowerIds();
 
         // 0  1  2  3  4  5
         // 6  7  8  9  10 11
@@ -65,11 +71,13 @@ public class InitialTowerChoicePanel : MonoBehaviour {
             125, 125, 125, 125, 125, 125,
             -125, -125, -125, -125, -125, -125,
             -350, -350, -350, -350, -350, -350
-        };
+        };        
 
         for (int i = 0; i < heroes.Length; i++) {
+            float column = (i % 6);
+            float row = Mathf.FloorToInt(i / 6);
             TowerModel hero = Game.instance.model.GetTower(heroes[i]);
-            ModHelperButton button = inset.AddButton(new Info("TowerButton3", xPos[i], yPos[i], 200), VanillaSprites.YellowBtn, new Action(() => reforgePanel.ChooseTower(hero.GetBaseId())));
+            ModHelperButton button = inset.AddButton(new Info("Tower Button", column * 250 - 625, row * -250 + 375, 200), VanillaSprites.YellowBtn, new Action(() => reforgePanel.ChooseTower(hero.GetBaseId())));
             button.AddImage(new Info("Image") { AnchorMin = new Vector2(0, 0), AnchorMax = new Vector2(1, 1), Size = 50 }, hero.portrait.GetGUID());
         }
         return reforgePanel;

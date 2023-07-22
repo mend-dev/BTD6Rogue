@@ -10,7 +10,10 @@
         <DebugType>embedded</DebugType>
     </PropertyGroup>
     <ItemGroup>
-      <Folder Include="Artifacts\" />
+      <Folder Include="Artifacts\Bloons\" />
+      <Folder Include="Bloons\" />
+      <Folder Include="Bosses\Blastapopoulos\" />
+      <Folder Include="Bosses\Phayze\" />
     </ItemGroup>
 
     <Import Project="..\btd6.targets" />

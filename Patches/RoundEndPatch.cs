@@ -23,7 +23,7 @@ static class RoundEndPatch {
         }
 
         // Tower choice every 10 rounds (starting at 5)
-        if ((completedRound + 1) % 10 == 5) {
+        if ((completedRound + 1) % BTD6Rogue.RoundsPerRandomTower == BTD6Rogue.TowersStartAtRound && BTD6Rogue.RandomTowers) {
             __instance.bridge.SetAutoPlay(false);
             TowerChoicePanel.Create(__instance.uiRect, __instance);
         }
@@ -34,13 +34,14 @@ static class RoundEndPatch {
             HeroChoicePanel.Create(__instance.uiRect, __instance);
         }
 
-        /*
-        // Artifact choice every 20 rounds (starting at 10)
-        if ((completedRound + 1) % 20 == 10) {
-            __instance.bridge.SetAutoPlay(false);
-            ArtifactChoicePanel.Create(__instance.uiRect, __instance);
-        }
+        
+        // Artifact choice every 15 rounds
+        //if ((completedRound + 1) % 15 == 0) {
+        //    __instance.bridge.SetAutoPlay(false);
+        //   ArtifactChoicePanel.Create(__instance.uiRect, __instance);
+        //}
 
+        /*
         foreach (string key in BTD6Rogue.mod.modifiers.Keys) {
             BTD6Rogue.mod.modifiers[key]--;
             if (BTD6Rogue.mod.modifiers[key] < 1) { BTD6Rogue.mod.modifiers.Remove(key); }

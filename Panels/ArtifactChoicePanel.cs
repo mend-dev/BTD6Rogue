@@ -2,12 +2,10 @@
 using BTD_Mod_Helper.Api.Components;
 using BTD_Mod_Helper.Api.Enums;
 using BTD_Mod_Helper.Extensions;
-using Il2CppAssets.Scripts.Models.Towers;
 using Il2CppAssets.Scripts.Simulation.Input;
 using Il2CppAssets.Scripts.Unity.UI_New.InGame;
 using MelonLoader;
 using UnityEngine;
-using System.Collections.Generic;
 
 namespace BTD6Rogue;
 
@@ -19,11 +17,7 @@ public class ArtifactChoicePanel : MonoBehaviour {
 
     public ArtifactChoicePanel(IntPtr ptr) : base(ptr) { }
 
-    public void ChooseTower(string hero) {
-        BTD6Rogue.mod.selectedHeroes.Add(hero);
-        TowerInventory towerInventory = __instance.GetTowerInventory();
-        towerInventory.towerMaxes[hero]++;
-        __instance.bridge.OnTowerInventoryChangedSim(true);
+    public void ChooseArtifact(string artifact) {
         __instance.bridge.SetAutoPlay(true);
         Destroy(gameObject);
     }

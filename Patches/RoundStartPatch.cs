@@ -1,13 +1,14 @@
 ﻿using Il2CppAssets.Scripts.Unity.UI_New.InGame;
 using HarmonyLib;
+using Il2CppAssets.Scripts.Unity.Bridge;
 
 namespace BTD6Rogue;
 
-[HarmonyPatch(typeof(InGame), nameof(InGame.RoundStart))]
+[HarmonyPatch(typeof(UnityToSimulation), nameof(UnityToSimulation.StartRound))]
 static class RoundStartPatch {
     [HarmonyPrefix]
-    private static bool Prefix(InGame __instance) {
-        if (BTD6Rogue.DisablePatchesInSandbox && __instance.bridge.IsSandboxMode()) { return true; }
+    private static bool Prefix(UnityToSimulation __instance) {
+        if (BTD6Rogue.DisablePatchesInSandbox && __instance.IsSandboxMode()) { return true; }
         return !BTD6Rogue.mod.uiOpen;
     }
 }

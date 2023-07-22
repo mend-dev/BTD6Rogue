@@ -1,10 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using BTD_Mod_Helper;
 using BTD_Mod_Helper.Api.Components;
 using BTD_Mod_Helper.Api.Enums;
 using BTD_Mod_Helper.Extensions;
+using Il2CppAssets.Scripts.Models;
+using Il2CppAssets.Scripts.Models.Gameplay.Mods;
+using Il2CppAssets.Scripts.Models.Rounds;
 using Il2CppAssets.Scripts.Unity.UI_New.InGame;
-using Il2CppAssets.Scripts.Unity.UI_New.InGame.RightMenu.Powers;
 using MelonLoader;
 using UnityEngine;
 
@@ -14,33 +17,43 @@ namespace BTD6Rogue;
 public class DifficultyChoicePanel : MonoBehaviour {
 
     public InGame __instance = null!;
+    public static DifficultyChoicePanel uiPanel = null!;
 
     public DifficultyChoicePanel(IntPtr ptr) : base(ptr) { }
 
     public void ChooseDifficulty(string difficulty) {
         InitialHeroChoicePanel.Create(__instance.uiRect, __instance);
 
+
         if (difficulty == "Poppable") {
             BTD6Rogue.mod.difficulty = new PoppableDifficulty();
+            //__instance.GetGameModel().GetModModel("BTD6Rogue-Roguemode").GetMutator<GlobalCostModModel>().multiplier = 0.7f;
         } else if (difficulty == "Easy") {
             BTD6Rogue.mod.difficulty = new EasyDifficulty();
+            //__instance.GetGameModel().GetModModel("BTD6Rogue-Roguemode").GetMutator<GlobalCostModModel>().multiplier = 0.85f;
         } else if (difficulty == "Medium") {
             BTD6Rogue.mod.difficulty = new MediumDifficulty();
+            //__instance.GetGameModel().GetModModel("BTD6Rogue-Roguemode").GetMutator<GlobalCostModModel>().multiplier = 1f;
         } else if (difficulty == "Hard") {
             BTD6Rogue.mod.difficulty = new HardDifficulty();
+            //__instance.GetGameModel().GetModModel("BTD6Rogue-Roguemode").GetMutator<GlobalCostModModel>().multiplier = 1.15f;
         } else if (difficulty == "Impoppable") {
             BTD6Rogue.mod.difficulty = new ImpoppableDifficulty();
+            //__instance.GetGameModel().GetModModel("BTD6Rogue-Roguemode").GetMutator<GlobalCostModModel>().multiplier = 1.3f;
         }
 
+        uiPanel = null!;
         __instance.GetGameModel().roundSet.rounds[0] = BTD6Rogue.mod.roundGenerator.GetRandomRoundModel(__instance.GetGameModel().roundSet.rounds[0], 0);
         Destroy(gameObject);
     }
 
     public static DifficultyChoicePanel Create(RectTransform menu, InGame __instance) {
+        BTD6Rogue.mod.uiOpen = true;
         ModHelperPanel panel = menu.gameObject.AddModHelperPanel(new Info("ReforgePanel", 0, 0, 2400, 1000),
             VanillaSprites.BrownInsertPanel);
         DifficultyChoicePanel difficultyChoicePanel = panel.AddComponent<DifficultyChoicePanel>();
         difficultyChoicePanel.__instance = __instance;
+        uiPanel = difficultyChoicePanel!;
 
         ModHelperPanel inset = panel.AddPanel(new Info("InnerPanel") {
             AnchorMin = new Vector2(0, 0), AnchorMax = new Vector2(1, 1), Size = -50 }, VanillaSprites.BrownInsertPanelDark);
@@ -59,8 +72,8 @@ public class DifficultyChoicePanel : MonoBehaviour {
             VanillaSprites.Red,
             VanillaSprites.Pink,
             VanillaSprites.Rainbow,
-            VanillaSprites.Moab,
-            VanillaSprites.Bad,
+            VanillaSprites.MOABIcon,
+            VanillaSprites.BADIcon,
         };
 
         ModHelperText infoText = inset.AddText(new Info("Title", 0, 400, 500, 500), "Difficulty", 96);

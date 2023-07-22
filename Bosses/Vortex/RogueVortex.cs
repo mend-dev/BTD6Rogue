@@ -1,7 +1,7 @@
 ﻿using BTD_Mod_Helper.Api.Bloons;
 using Il2CppAssets.Scripts.Models.Bloons;
 
-namespace BTD6Rogue;
+namespace BTD6Rogue.Bosses.Vortex;
 
 
 public class PoppableRogueVortex1 : ModBloon { public override string BaseBloon => "Vortex1"; public override void ModifyBaseBloonModel(BloonModel bloonModel) { VortexConfig.ApplyVortexSettings(bloonModel, "Poppable", 0); } }

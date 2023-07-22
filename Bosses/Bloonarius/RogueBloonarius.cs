@@ -1,7 +1,7 @@
 ﻿using BTD_Mod_Helper.Api.Bloons;
 using Il2CppAssets.Scripts.Models.Bloons;
 
-namespace BTD6Rogue;
+namespace BTD6Rogue.Bosses.Bloonarius;
 
 public class PoppableRogueBloonarius1 : ModBloon { public override string BaseBloon => "Bloonarius1"; public override void ModifyBaseBloonModel(BloonModel bloonModel) { BloonariusConfig.ApplyBloonariusSettings(bloonModel, "Poppable", 0); } }
 public class PoppableRogueBloonarius2 : ModBloon { public override string BaseBloon => "Bloonarius1"; public override void ModifyBaseBloonModel(BloonModel bloonModel) { BloonariusConfig.ApplyBloonariusSettings(bloonModel, "Poppable", 1); } }

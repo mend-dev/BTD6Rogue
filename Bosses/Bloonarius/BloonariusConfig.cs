@@ -5,19 +5,21 @@ using System.Collections.Generic;
 using BTD_Mod_Helper.Api.Enums;
 using UnityEngine;
 
-namespace BTD6Rogue;
+namespace BTD6Rogue.Bosses.Bloonarius;
 
-public static class BloonariusConfig {
+public static class BloonariusConfig
+{
 
     // General Stats
-    public static readonly float baseMaxHealth = 7500f;
-    public static readonly float levelMaxHealthMultiplier = 3f;
+    public static readonly float baseMaxHealth = 6000f;
+    public static readonly float levelMaxHealthMultiplier = 1.5f;
 
     public static readonly float baseSpeed = 1.2f;
     public static readonly float levelSpeedAddition = 0.1f;
 
     // Difficulty Multiplier
-    public static readonly Dictionary<string, float> difficultyMultipliers = new Dictionary<string, float>() {
+    public static readonly Dictionary<string, float> difficultyMultipliers = new Dictionary<string, float>()
+    {
         ["Poppable"] = 0.7f,
         ["Easy"] = 0.85f,
         ["Medium"] = 1f,
@@ -71,31 +73,38 @@ public static class BloonariusConfig {
         BloonType.Ceramic
     };
 
-    public static void ApplyBloonariusSettings(BloonModel bloonModel, string difficulty, int level) {
+    public static void ApplyBloonariusSettings(BloonModel bloonModel, string difficulty, int level)
+    {
         float multiplier = difficultyMultipliers[difficulty];
 
-        bloonModel.maxHealth = baseMaxHealth * level * multiplier;
+        bloonModel.maxHealth = baseMaxHealth * (levelMaxHealthMultiplier * level) * multiplier;
         if (level == 0) { bloonModel.maxHealth = baseMaxHealth * multiplier; }
 
         bloonModel.leakDamage = 99999f;
-        bloonModel.speed = (baseSpeed + (levelSpeedAddition * level)) * multiplier;
-        bloonModel.Speed = (baseSpeed + (levelSpeedAddition * level)) * multiplier;
+        bloonModel.speed = (baseSpeed + levelSpeedAddition * level) * multiplier;
+        bloonModel.Speed = (baseSpeed + levelSpeedAddition * level) * multiplier;
 
-        foreach (SpawnBloonsActionModel model in bloonModel.GetBehaviors<SpawnBloonsActionModel>()) {
-            if (model.actionId == "StrongSpawn") {
+        foreach (SpawnBloonsActionModel model in bloonModel.GetBehaviors<SpawnBloonsActionModel>())
+        {
+            if (model.actionId == "StrongSpawn")
+            {
                 model.bloonType = strongSpawnBloons[level];
-                model.spawnCount = Mathf.FloorToInt((baseStrongSpawnCount + (levelStrongSpawnCountAddition * level)) * multiplier);
-                model.spawnDistAhead = (baseStrongSpawnDistAhead + (levelStrongSpawnDistAheadAddition * level)) * multiplier;
-            } else if (model.actionId == "WeakSpawn") {
+                model.spawnCount = Mathf.FloorToInt((baseStrongSpawnCount + levelStrongSpawnCountAddition * level) * multiplier);
+                model.spawnDistAhead = (baseStrongSpawnDistAhead + levelStrongSpawnDistAheadAddition * level) * multiplier;
+            }
+            else if (model.actionId == "WeakSpawn")
+            {
                 model.bloonType = weakSpawnBloons[level];
-                model.spawnCount = Mathf.FloorToInt((baseWeakSpawnCount + (levelWeakSpawnCountAddition * level)) * multiplier);
-                model.spawnTrackMax = (baseWeakSpawnTrackMax + (levelWeakSpawnTrackMaxAddition * level)) * multiplier;
-                model.spawnTrackMin = (baseWeakSpawnTrackMin + (levelWeakSpawnTrackMinAddition * level)) * multiplier;
-            } else if (model.actionId == "WeakerSpawn") {
+                model.spawnCount = Mathf.FloorToInt((baseWeakSpawnCount + levelWeakSpawnCountAddition * level) * multiplier);
+                model.spawnTrackMax = (baseWeakSpawnTrackMax + levelWeakSpawnTrackMaxAddition * level) * multiplier;
+                model.spawnTrackMin = (baseWeakSpawnTrackMin + levelWeakSpawnTrackMinAddition * level) * multiplier;
+            }
+            else if (model.actionId == "WeakerSpawn")
+            {
                 model.bloonType = bleedSpawnBloons[level];
-                model.spawnCount = Mathf.FloorToInt((baseBleedSpawnCount + (levelBleedSpawnCountAddition * level)) * multiplier);
-                model.spawnTrackMax = (baseBleedSpawnTrackMax + (levelBleedSpawnTrackMaxAddition * level)) * multiplier;
-                model.spawnTrackMin = (baseBLeedSpawnTrackMin + (levelBleedSpawnTrackMinAddition * level)) * multiplier;
+                model.spawnCount = Mathf.FloorToInt((baseBleedSpawnCount + levelBleedSpawnCountAddition * level) * multiplier);
+                model.spawnTrackMax = (baseBleedSpawnTrackMax + levelBleedSpawnTrackMaxAddition * level) * multiplier;
+                model.spawnTrackMin = (baseBLeedSpawnTrackMin + levelBleedSpawnTrackMinAddition * level) * multiplier;
             }
         }
 

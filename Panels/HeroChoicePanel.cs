@@ -15,6 +15,7 @@ namespace BTD6Rogue;
 public class HeroChoicePanel : MonoBehaviour {
 
     public InGame __instance = null!;
+    public static HeroChoicePanel uiPanel = null!;
     public string[] heroChoices = new string[3];
 
     public HeroChoicePanel(IntPtr ptr) : base(ptr) { }
@@ -25,14 +26,18 @@ public class HeroChoicePanel : MonoBehaviour {
         towerInventory.towerMaxes[hero]++;
         __instance.bridge.OnTowerInventoryChangedSim(true);
         __instance.bridge.SetAutoPlay(true);
+        BTD6Rogue.mod.uiOpen = false;
+        uiPanel = null!;
         Destroy(gameObject);
     }
 
     public static HeroChoicePanel Create(RectTransform menu, InGame __instance) {
+        BTD6Rogue.mod.uiOpen = true;
         var panel = menu.gameObject.AddModHelperPanel(new Info("HeroChoicePanel", 0, 0, 2400, 800),
             VanillaSprites.BrownInsertPanel);
         HeroChoicePanel heroChoicePanel = panel.AddComponent<HeroChoicePanel>();
         heroChoicePanel.__instance = __instance;
+        uiPanel = heroChoicePanel!;
 
         var inset = panel.AddPanel(new Info("InnerPanel") { AnchorMin = new Vector2(0, 0), AnchorMax = new Vector2(1, 1), Size = -50 },
             VanillaSprites.BrownInsertPanelDark);

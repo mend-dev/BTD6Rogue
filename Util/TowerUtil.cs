@@ -10,16 +10,16 @@ namespace BTD6Rogue;
 public static class TowerUtil {
 
     public static int GetMaxPath(int round) {
-        if (round >= 0 && round <= 19) {
-            return 2;
-        } else if (round >= 20 && round <= 39) {
-            return 3;
-        } else if (round >= 40 && round <= 59) {
-            return 4;
-        } else if (round >= 60) {
+        if (round + 1 >= BTD6Rogue.Tier5MinimumRound) {
             return 5;
-        } else {
+        } else if (round + 1 >= BTD6Rogue.Tier4MinimumRound) {
+            return 4;
+        } else if (round + 1 >= BTD6Rogue.Tier3MinimumRound) {
+            return 3;
+        } else if (round + 1 >= BTD6Rogue.Tier2MinimumRound) {
             return 2;
+        } else {
+            return 1;
         }
     }
 
@@ -28,7 +28,7 @@ public static class TowerUtil {
 
         for (int i = 0; i < 3; i++) {
             TowerModel newTower = GetTower(maxPath, waterMap);
-            while (towerModels.Contains(newTower) || DuplicatePath(newTower)) {
+            while (towerModels.Contains(newTower) || DuplicatePath(newTower)/* || newTower == null*/) {
                 newTower = GetTower(maxPath, waterMap);
             }
             towerModels.Add(newTower);
@@ -38,9 +38,9 @@ public static class TowerUtil {
     }
 
     public static bool DuplicatePath(TowerModel tower) {
-        if (tower.GetUpgradeLevel(0) >= 1 && BTD6Rogue.mod.rogueTowers[tower.baseId].top) { return true; }
-        if (tower.GetUpgradeLevel(1) >= 1 && BTD6Rogue.mod.rogueTowers[tower.baseId].mid) { return true; }
-        if (tower.GetUpgradeLevel(2) >= 1 && BTD6Rogue.mod.rogueTowers[tower.baseId].bot) { return true; }
+        if (tower.GetUpgradeLevel(0) >= 1 && BTD6Rogue.mod.rogueTowers[tower.baseId].lockedPaths[0]) { return true; }
+        if (tower.GetUpgradeLevel(1) >= 1 && BTD6Rogue.mod.rogueTowers[tower.baseId].lockedPaths[1]) { return true; }
+        if (tower.GetUpgradeLevel(2) >= 1 && BTD6Rogue.mod.rogueTowers[tower.baseId].lockedPaths[2]) { return true; }
         return false;
     }
 
@@ -50,26 +50,29 @@ public static class TowerUtil {
 
         string towerId = GetRandomTowerId(waterMap);
 
-        TowerModel towerModel = Game.instance.model.GetTower(towerId);
+        TowerModel towerModel = Game.instance.model.GetTowerModel(towerId);
 
         if (path == 0) {
-            towerModel = Game.instance.model.GetTower(towerId, maxPath, 0, 0);
+            towerModel = Game.instance.model.GetTowerModel(towerId, maxPath, 0, 0);
         } else if (path == 1) {
-            towerModel = Game.instance.model.GetTower(towerId, 0, maxPath, 0);
+            towerModel = Game.instance.model.GetTowerModel(towerId, 0, maxPath, 0);
         } else if (path == 2) {
-            towerModel = Game.instance.model.GetTower(towerId, 0, 0, maxPath);
+            towerModel = Game.instance.model.GetTowerModel(towerId, 0, 0, maxPath);
         }
 
         return towerModel;
     }
 
     public static string GetRandomTowerId(bool waterMap) {
+        string[] towerIds = GetAllTowerIds();
         if (waterMap) {
-            return towerNames[new Random().Next(towerNames.Count)];
+            return towerIds[new Random().Next(towerIds.Length)];
         } else {
-            string towerName = towerNames[new Random().Next(towerNames.Count)];
-            while (towerName == "MonkeyBuccaneer" || towerName == "MonkeySub") {
-                towerName = towerNames[new Random().Next(towerNames.Count)];
+            string towerName = towerIds[new Random().Next(towerIds.Length)];
+            TowerModel towerModel = Game.instance.model.GetTowerModel(towerName);
+            while (towerModel.IsWaterBased()) {
+                towerName = towerIds[new Random().Next(towerIds.Length)];
+                towerModel = Game.instance.model.GetTowerModel(towerName);
             }
             return towerName;
         }
@@ -152,6 +155,17 @@ public static class TowerUtil {
             return 2 + baseCount;
         }
         return 3 + baseCount;
+    }
+
+    public static string[] GetAllTowerIds() {
+        List<string> towerIds = new List<string>();
+
+        foreach (RogueTower rogueTower in BTD6Rogue.mod.rogueTowers.GetValues()) {
+            if (rogueTower.baseTowerModel.IsHero()) { continue; }
+            towerIds.Add(rogueTower.baseId);
+        }
+
+        return towerIds.ToArray();
     }
 
     public static readonly Dictionary<string, float> mapLengths = new Dictionary<string, float> {

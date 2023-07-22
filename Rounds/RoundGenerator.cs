@@ -22,9 +22,9 @@ public class RoundGenerator {
         int mincrease = 0;
 
         int bossInt = new Random().Next(3);
-        string bossId = BTD6Rogue.mod.overrideBoss;
-        if (bossInt == 0) { bossId = "RogueBloonarius"; } else if (bossInt == 1) { bossId = "RogueVortex"; } else if (bossInt == 2) { bossId = "RogueLych"; }
-        //if (bossInt == 1) { bossId = "RogueDreadbloon"; } else if (bossInt == 2) { bossId = "RogueLych"; } else if (bossInt == 3) { bossId = "RogueVortex"; }
+        //string bossId = BTD6Rogue.mod.overrideBoss;
+        string bossId = "RogueBloonarius";
+        if (bossInt == 0) { bossId = "RogueBloonarius"; } else if (bossInt == 1) { bossId = "RogueDreadbloon"; } else if (bossInt == 2) { bossId = "RogueLych"; } else if (bossInt == 3) { bossId = "RogueVortex"; }
 
         if (round + 1 == 20) {
             roundModel.AddBloonGroup("BTD6Rogue-" + BTD6Rogue.mod.difficulty.DifficultyName + bossId + "1", 1, 0, 0);

@@ -16,11 +16,11 @@ static class UpgradePathPatch {
         if (tower.towerModel.IsHero()) { return; }
 
         if (path == 0) {
-            if (tower.GetUpgrade(path) != null && tower.GetUpgrade(path).tier >= BTD6Rogue.mod.rogueTowers[tower.towerModel.baseId].maxTopPath) { __result = true; } else if (tower.GetUpgrade(path) != null) { __result = false; }
+            if (tower.GetUpgrade(path) != null && tower.GetUpgrade(path).tier >= BTD6Rogue.mod.rogueTowers[tower.towerModel.baseId].limitPaths[0]) { __result = true; } else if (tower.GetUpgrade(path) != null) { __result = false; }
         } else if (path == 1) {
-            if (tower.GetUpgrade(path) != null && tower.GetUpgrade(path).tier >= BTD6Rogue.mod.rogueTowers[tower.towerModel.baseId].maxMidPath) { __result = true; } else if (tower.GetUpgrade(path) != null) { __result = false; }
+            if (tower.GetUpgrade(path) != null && tower.GetUpgrade(path).tier >= BTD6Rogue.mod.rogueTowers[tower.towerModel.baseId].limitPaths[1]) { __result = true; } else if (tower.GetUpgrade(path) != null) { __result = false; }
         } else if (path == 2) {
-            if (tower.GetUpgrade(path) != null && tower.GetUpgrade(path).tier >= BTD6Rogue.mod.rogueTowers[tower.towerModel.baseId].maxBotPath) { __result = true; } else if (tower.GetUpgrade(path) != null) { __result = false; }
+            if (tower.GetUpgrade(path) != null && tower.GetUpgrade(path).tier >= BTD6Rogue.mod.rogueTowers[tower.towerModel.baseId].limitPaths[2]) { __result = true; } else if (tower.GetUpgrade(path) != null) { __result = false; }
         }
     }
 }

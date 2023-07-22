@@ -16,6 +16,7 @@ namespace BTD6Rogue;
 public class InitialHeroChoicePanel : MonoBehaviour {
 
     public InGame __instance = null!;
+    public static InitialHeroChoicePanel uiPanel = null!;
     public RectTransform menu = null!;
 
     public InitialHeroChoicePanel(IntPtr ptr) : base(ptr) { }
@@ -25,7 +26,10 @@ public class InitialHeroChoicePanel : MonoBehaviour {
         TowerInventory towerInventory = __instance.GetTowerInventory();
         towerInventory.towerMaxes[hero] = 1;
         __instance.bridge.OnTowerInventoryChangedSim(true);
-        InitialTowerChoicePanel.Create(__instance.uiRect, __instance);
+        if (BTD6Rogue.RandomTowers) {
+            InitialTowerChoicePanel.Create(__instance.uiRect, __instance);
+            uiPanel = null!;
+        }
         Destroy(gameObject);
     }
 
@@ -34,6 +38,7 @@ public class InitialHeroChoicePanel : MonoBehaviour {
         var initialHeroChoicePanel = panel.AddComponent<InitialHeroChoicePanel>();
         initialHeroChoicePanel.menu = menu;
         initialHeroChoicePanel.__instance = __instance;
+        uiPanel = initialHeroChoicePanel!;
 
         var inset = panel.AddPanel(new Info("InnerPanel") { AnchorMin = new Vector2(0, 0), AnchorMax = new Vector2(1, 1), Size = -50  },
             VanillaSprites.BrownInsertPanelDark);

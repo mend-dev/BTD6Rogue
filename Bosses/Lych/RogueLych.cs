@@ -1,7 +1,7 @@
 ﻿using BTD_Mod_Helper.Api.Bloons;
 using Il2CppAssets.Scripts.Models.Bloons;
 
-namespace BTD6Rogue;
+namespace BTD6Rogue.Bosses.Lych;
 
 public class PoppableRogueLych1 : ModBloon { public override string BaseBloon => "Lych1"; public override void ModifyBaseBloonModel(BloonModel bloonModel) { LychConfig.ApplyLychSettings(bloonModel, "Poppable", 0); } }
 public class PoppableRogueLych2 : ModBloon { public override string BaseBloon => "Lych1"; public override void ModifyBaseBloonModel(BloonModel bloonModel) { LychConfig.ApplyLychSettings(bloonModel, "Poppable", 1); } }

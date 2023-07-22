@@ -9,8 +9,8 @@ namespace BTD6Rogue;
 public static class VortexConfig {
 
     // General Stats
-    public static readonly float baseMaxHealth = 6000f;
-    public static readonly float levelMaxHealthMultiplier = 3f;
+    public static readonly float baseMaxHealth = 5000f;
+    public static readonly float levelMaxHealthMultiplier = 1.5f;
 
     public static readonly float baseSpeed = 2.75f;
     public static readonly float levelSpeedAddition = 0.25f;
@@ -59,39 +59,45 @@ public static class VortexConfig {
     public static void ApplyVortexSettings(BloonModel bloonModel, string difficulty, int level) {
         float multiplier = difficultyMultipliers[difficulty];
 
-        bloonModel.maxHealth = baseMaxHealth * level * multiplier;
+        bloonModel.maxHealth = baseMaxHealth * (levelMaxHealthMultiplier * level) * multiplier;
         if (level == 0) { bloonModel.maxHealth = baseMaxHealth * multiplier; }
 
         bloonModel.leakDamage = 99999f;
-        bloonModel.speed = (baseSpeed + (levelSpeedAddition * level)) * multiplier;
-        bloonModel.Speed = (baseSpeed + (levelSpeedAddition * level)) * multiplier;
+        bloonModel.speed = (baseSpeed + levelSpeedAddition * level) * multiplier;
+        bloonModel.Speed = (baseSpeed + levelSpeedAddition * level) * multiplier;
 
-        foreach (StunTowersInRadiusActionModel model in bloonModel.GetBehaviors<StunTowersInRadiusActionModel>()) {
-            model.radius = (baseStunRadius + (levelStunRadiusAddition * level)) * multiplier;
-            model.stunDuration = (baseStunDuration + (levelStunDurationAddition * level)) * multiplier;
+        foreach (StunTowersInRadiusActionModel model in bloonModel.GetBehaviors<StunTowersInRadiusActionModel>())
+        {
+            model.radius = (baseStunRadius + levelStunRadiusAddition * level) * multiplier;
+            model.stunDuration = (baseStunDuration + levelStunDurationAddition * level) * multiplier;
         }
 
-        foreach (SetSpeedPercentActionModel model in bloonModel.GetBehaviors<SetSpeedPercentActionModel>()) {
-            model.distance = (baseBackupDistance + (levelBackupDistanceAddition * level)) * multiplier;
+        foreach (SetSpeedPercentActionModel model in bloonModel.GetBehaviors<SetSpeedPercentActionModel>())
+        {
+            model.distance = (baseBackupDistance + levelBackupDistanceAddition * level) * multiplier;
         }
 
-        foreach (DestroyProjectilesInRadiusActionModel model in bloonModel.GetBehaviors<DestroyProjectilesInRadiusActionModel>()) {
-            model.radius = (baseDestroyProjectileRadius + (levelDestroyProjectileRadiusAddition * level)) * multiplier;
+        foreach (DestroyProjectilesInRadiusActionModel model in bloonModel.GetBehaviors<DestroyProjectilesInRadiusActionModel>())
+        {
+            model.radius = (baseDestroyProjectileRadius + levelDestroyProjectileRadiusAddition * level) * multiplier;
         }
 
-        foreach (ReflectProjectilesInRadiusActionModel model in bloonModel.GetBehaviors<ReflectProjectilesInRadiusActionModel>()) {
-            model.lifespan = (baseReflectProjectileLifespan + (levelRelfectProjectileLifespanAddition * level)) * multiplier;
-            model.innerRadius = (baseReflectProjectileInnerRadius + (levelReflectProjectileInnerRadiusAddition * level)) * multiplier;
-            model.outerRadius = (baseReflectProjectileOuterRadius + (levelReflectProjectileOuterRadiusAddition * level)) * multiplier;
+        foreach (ReflectProjectilesInRadiusActionModel model in bloonModel.GetBehaviors<ReflectProjectilesInRadiusActionModel>())
+        {
+            model.lifespan = (baseReflectProjectileLifespan + levelRelfectProjectileLifespanAddition * level) * multiplier;
+            model.innerRadius = (baseReflectProjectileInnerRadius + levelReflectProjectileInnerRadiusAddition * level) * multiplier;
+            model.outerRadius = (baseReflectProjectileOuterRadius + levelReflectProjectileOuterRadiusAddition * level) * multiplier;
         }
 
-        foreach (TimeTriggerModel model in bloonModel.GetBehaviors<TimeTriggerModel>()) {
-            model.interval = (baseTimeInterval + (levelTimeIntervalAddition * level)) * multiplier;
+        foreach (TimeTriggerModel model in bloonModel.GetBehaviors<TimeTriggerModel>())
+        {
+            model.interval = (baseTimeInterval + levelTimeIntervalAddition * level) * multiplier;
         }
 
-        foreach (BuffBloonSpeedModel model in bloonModel.GetBehaviors<BuffBloonSpeedModel>()) {
-            model.speedBoost = (baseSpeedBoost + (levelSpeedBoostAddition * level)) * multiplier;
-            model.debuffInRadius = (baseDebuffRadius + (levelDebuffRadiusAddition * level)) * multiplier;
+        foreach (BuffBloonSpeedModel model in bloonModel.GetBehaviors<BuffBloonSpeedModel>())
+        {
+            model.speedBoost = (baseSpeedBoost + levelSpeedBoostAddition * level) * multiplier;
+            model.debuffInRadius = (baseDebuffRadius + levelDebuffRadiusAddition * level) * multiplier;
         }
     }
 }
