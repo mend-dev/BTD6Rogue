@@ -16,7 +16,7 @@ static class AddHeroXpPatch {
 
         int heroCount = 0;
 
-        foreach (TowerToSimulation tts in InGame.instance.bridge.GetAllTowers()) {
+        foreach (TowerToSimulation tts in InGame.instance.bridge.GetAllTowers().ToList()) {
             if (tts.GetTower().towerModel.towerSet == Il2CppAssets.Scripts.Models.TowerSets.TowerSet.Hero) {
                 heroCount++;
             }

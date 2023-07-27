@@ -22,7 +22,7 @@ public class DifficultyChoicePanel : MonoBehaviour {
     public DifficultyChoicePanel(IntPtr ptr) : base(ptr) { }
 
     public void ChooseDifficulty(string difficulty) {
-        InitialHeroChoicePanel.Create(__instance.uiRect, __instance);
+        GameSettingsPanel.Create(__instance.uiRect, __instance);
 
 
         if (difficulty == "Poppable") {

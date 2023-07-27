@@ -1,9 +1,12 @@
-﻿using BTD_Mod_Helper.Extensions;
+﻿using BTD_Mod_Helper;
+using BTD_Mod_Helper.Extensions;
 using Il2CppAssets.Scripts.Models.Bloons;
 using Il2CppAssets.Scripts.Models.Rounds;
 using Il2CppAssets.Scripts.Unity;
+using Il2CppAssets.Scripts.Unity.UI_New.InGame;
 using System;
 using System.Collections.Generic;
+using System.Threading;
 
 namespace BTD6Rogue;
 
@@ -14,6 +17,35 @@ public class RoundGenerator {
     public int randEndTime = 450;
     public int minEndTime = 150;
 
+    public string nextBoss = "";
+
+    public List<string> possibleBosses = new List<string>();
+
+    public void SpawnBloonsDelay() {
+        Thread.Sleep(25000);
+        if ((InGame.instance.bridge.GetCurrentRound() + 1) % 20 == 0) {
+            BTD6Rogue.mod.canGainMoney = false;
+            Thread t = new Thread(new ThreadStart(SpawnBloons));
+            t.Start();
+        }
+    }
+
+    public void SpawnBloons() {
+        string[] possibleBloons = GetValidBloons(InGame.instance.bridge.GetCurrentRound() + 1);
+        string bloonId = possibleBloons[new Random().Next(possibleBloons.Length)];
+        if (bloonId.ToLower().Contains("moab") || bloonId.ToLower().Contains("bfb") || bloonId.ToLower().Contains("zomg") || bloonId.ToLower().Contains("ddt") || bloonId.ToLower().Contains("bad")) {
+            InGame.instance.SpawnBloons(bloonId, 1, 16);
+        } else {
+            InGame.instance.SpawnBloons(bloonId, 10, 16);
+        }
+
+        Thread.Sleep(2000);
+        if ((InGame.instance.bridge.GetCurrentRound() + 1) % 20 == 0) {
+            Thread t = new Thread(new ThreadStart(SpawnBloons));
+            t.Start();
+        }
+    }
+
     public RoundModel GetRandomRoundModel(RoundModel baseRoundModel, int round) {
         RoundModel roundModel = baseRoundModel;
         roundModel.ClearBloonGroups();
@@ -21,23 +53,22 @@ public class RoundGenerator {
         int bloonGroups = new Random().Next(4) + 3;
         int mincrease = 0;
 
-        int bossInt = new Random().Next(3);
-        //string bossId = BTD6Rogue.mod.overrideBoss;
-        string bossId = "RogueBloonarius";
-        if (bossInt == 0) { bossId = "RogueBloonarius"; } else if (bossInt == 1) { bossId = "RogueDreadbloon"; } else if (bossInt == 2) { bossId = "RogueLych"; } else if (bossInt == 3) { bossId = "RogueVortex"; }
+        if ((round + 1) % 20 == 0) {
+            string bossId = nextBoss;
 
-        if (round + 1 == 20) {
-            roundModel.AddBloonGroup("BTD6Rogue-" + BTD6Rogue.mod.difficulty.DifficultyName + bossId + "1", 1, 0, 0);
-        } else if (round + 1 == 40) {
-            roundModel.AddBloonGroup("BTD6Rogue-" + BTD6Rogue.mod.difficulty.DifficultyName + bossId + "2", 1, 0, 0);
-        } else if (round + 1 == 60) {
-            roundModel.AddBloonGroup("BTD6Rogue-" + BTD6Rogue.mod.difficulty.DifficultyName + bossId + "3", 1, 0, 0);
-        } else if (round + 1 == 80) {
-            roundModel.AddBloonGroup("BTD6Rogue-" + BTD6Rogue.mod.difficulty.DifficultyName + bossId + "4", 1, 0, 0);
-        } else if (round + 1 == 100) {
-            roundModel.AddBloonGroup("BTD6Rogue-" + BTD6Rogue.mod.difficulty.DifficultyName + bossId + "5", 1, 0, 0);
-        } else if (round + 1 == 120) {
-            roundModel.AddBloonGroup("BTD6Rogue-" + BTD6Rogue.mod.difficulty.DifficultyName + bossId + "6", 1, 0, 0);
+            if (round + 1 == 20) {
+                roundModel.AddBloonGroup("BTD6Rogue-" + BTD6Rogue.mod.difficulty.DifficultyName + bossId + "1", 1, 0, 0);
+            } else if (round + 1 == 40) {
+                roundModel.AddBloonGroup("BTD6Rogue-" + BTD6Rogue.mod.difficulty.DifficultyName + bossId + "2", 1, 0, 0);
+            } else if (round + 1 == 60) {
+                roundModel.AddBloonGroup("BTD6Rogue-" + BTD6Rogue.mod.difficulty.DifficultyName + bossId + "3", 1, 0, 0);
+            } else if (round + 1 == 80) {
+                roundModel.AddBloonGroup("BTD6Rogue-" + BTD6Rogue.mod.difficulty.DifficultyName + bossId + "4", 1, 0, 0);
+            } else if (round + 1 == 100) {
+                roundModel.AddBloonGroup("BTD6Rogue-" + BTD6Rogue.mod.difficulty.DifficultyName + bossId + "5", 1, 0, 0);
+            } else if (round + 1 == 120) {
+                roundModel.AddBloonGroup("BTD6Rogue-" + BTD6Rogue.mod.difficulty.DifficultyName + bossId + "6", 1, 0, 0);
+            }
         }
 
         for (int i = 0; i < bloonGroups; i++) {

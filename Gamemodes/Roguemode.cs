@@ -6,9 +6,9 @@ using Il2CppAssets.Scripts.Models;
 namespace BTD6Rogue;
 
 public class Roguemode : ModGameMode {
-    public override string Difficulty => DifficultyType.Hard;
+    public override string Difficulty => DifficultyType.Medium;
 
-    public override string BaseGameMode => GameModeType.Hard;
+    public override string BaseGameMode => GameModeType.Medium;
 
     public override string DisplayName => "BTD6 Rogue";
 

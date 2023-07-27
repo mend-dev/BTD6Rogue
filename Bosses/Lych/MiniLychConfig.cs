@@ -9,7 +9,7 @@ namespace BTD6Rogue;
 public static class MiniLychConfig {
 
     // General Stats
-    public static readonly float baseMaxHealth = 500;
+    public static readonly float baseMaxHealth = 1000;
     public static readonly float levelMaxHealthMultiplier = 2;
 
     public static readonly float baseSpeed = 5;

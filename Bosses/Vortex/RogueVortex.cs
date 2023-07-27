@@ -3,7 +3,6 @@ using Il2CppAssets.Scripts.Models.Bloons;
 
 namespace BTD6Rogue.Bosses.Vortex;
 
-
 public class PoppableRogueVortex1 : ModBloon { public override string BaseBloon => "Vortex1"; public override void ModifyBaseBloonModel(BloonModel bloonModel) { VortexConfig.ApplyVortexSettings(bloonModel, "Poppable", 0); } }
 public class PoppableRogueVortex2 : ModBloon { public override string BaseBloon => "Vortex1"; public override void ModifyBaseBloonModel(BloonModel bloonModel) { VortexConfig.ApplyVortexSettings(bloonModel, "Poppable", 1); } }
 public class PoppableRogueVortex3 : ModBloon { public override string BaseBloon => "Vortex2"; public override void ModifyBaseBloonModel(BloonModel bloonModel) { VortexConfig.ApplyVortexSettings(bloonModel, "Poppable", 2); } }

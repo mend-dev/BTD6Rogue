@@ -9,6 +9,12 @@ using BTD_Mod_Helper.Api.ModOptions;
 using UnityEngine;
 using Il2CppAssets.Scripts.Models.Towers;
 using Il2CppAssets.Scripts.Models.TowerSets;
+using Il2CppAssets.Scripts.Unity;
+using System.Windows.Input;
+using System;
+using System.Linq;
+using BTD_Mod_Helper.Api.Towers;
+using Unity.Jobs;
 
 [assembly: MelonInfo(typeof(BTD6Rogue.BTD6Rogue), ModHelperData.Name, ModHelperData.Version, ModHelperData.RepoOwner)]
 [assembly: MelonGame("Ninja Kiwi", "BloonsTD6")]
@@ -40,6 +46,9 @@ public class BTD6Rogue : BloonsTD6Mod {
     public int towerCount = 0;
     public bool uiOpen = false;
     public float previousIncrease = 0;
+    public int rerolls = 0;
+
+    public bool canGainMoney = true;
 
     #region Mod Settings
     public static readonly ModSettingHotkey FasterForwardHotkey = new(KeyCode.F1); // Doesn't Work
@@ -74,8 +83,9 @@ public class BTD6Rogue : BloonsTD6Mod {
     // Banana Farmer
     // Pontoon
     // Inflatable Pool
-
     public static readonly ModSettingBool LimitUpgrades = new(true); // Doesn't Work
+
+    public static readonly ModSettingCategory ParagonSettings = new("Paragon Settings") { collapsed = true };
 
     public static readonly ModSettingCategory HeroSettings = new("Hero Settings") { collapsed = true };
     public static readonly ModSettingBool MultipleHeroes = new(true) { category = HeroSettings }; // Doesn't Work
@@ -128,6 +138,9 @@ public class BTD6Rogue : BloonsTD6Mod {
     }
 
     public void StartRogueGame(InGame __instance) {
+
+        rerolls = 0;
+        canGainMoney = true;
 
         // Get rid of all ui panels if they exist
         DifficultyChoicePanel.uiPanel?.Destroy();

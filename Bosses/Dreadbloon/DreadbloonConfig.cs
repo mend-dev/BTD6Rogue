@@ -10,11 +10,11 @@ namespace BTD6Rogue;
 public static class DreadbloonConfig {
 
     // General Stats
-    public static readonly float baseMaxHealth = 1000;
+    public static readonly float baseMaxHealth = 2000;
     public static readonly float levelMaxHealthMultiplier = 3;
 
     public static readonly float baseSpeed = 1;
-    public static readonly float levelSpeedAddition = 0.125f;
+    public static readonly float levelSpeedAddition = 0.25f;
 
     // Difficulty Multiplier
     public static readonly Dictionary<string, float> difficultyMultipliers = new Dictionary<string, float>() {
@@ -30,7 +30,7 @@ public static class DreadbloonConfig {
     public static readonly float levelDamageReductionAddition = 0.1f;
 
     //
-    public static readonly float baseArmorAmount = 500;
+    public static readonly float baseArmorAmount = 100;
     public static readonly float levelArmorAmountMultiplier = 3;
     public static readonly float baseSpeedMultiplier = 1f;
     public static readonly float levelSpeedMultiplierAddition = 0;

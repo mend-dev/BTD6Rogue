@@ -6,19 +6,17 @@ using UnityEngine;
 
 namespace BTD6Rogue;
 
-public static class LychConfig
-{
+public static class LychConfig {
 
     // General Stats
-    public static readonly float baseMaxHealth = 6000;
+    public static readonly float baseMaxHealth = 6500;
     public static readonly float levelMaxHealthMultiplier = 3;
 
-    public static readonly float baseSpeed = 1f;
-    public static readonly float levelSpeedAddition = 0.1f;
+    public static readonly float baseSpeed = 1.25f;
+    public static readonly float levelSpeedAddition = 0.25f;
 
     // Difficulty Multiplier
-    public static readonly Dictionary<string, float> difficultyMultipliers = new Dictionary<string, float>()
-    {
+    public static readonly Dictionary<string, float> difficultyMultipliers = new Dictionary<string, float>() {
         ["Poppable"] = 0.7f,
         ["Easy"] = 0.85f,
         ["Medium"] = 1f,
@@ -62,8 +60,7 @@ public static class LychConfig
     public static readonly float baseSpeedDownPercent = 0.5f;
     public static readonly float levelSpeedDownPercentAddition = 0;
 
-    public static void ApplyLychSettings(BloonModel bloonModel, string difficulty, int level)
-    {
+    public static void ApplyLychSettings(BloonModel bloonModel, string difficulty, int level) {
         float multiplier = difficultyMultipliers[difficulty];
 
         bloonModel.maxHealth = baseMaxHealth * (levelMaxHealthMultiplier * level) * multiplier;
@@ -73,8 +70,7 @@ public static class LychConfig
         bloonModel.speed = (baseSpeed + levelSpeedAddition * level) * multiplier;
         bloonModel.Speed = (baseSpeed + levelSpeedAddition * level) * multiplier;
 
-        foreach (TimeTriggerModel model in bloonModel.GetBehaviors<TimeTriggerModel>())
-        {
+        foreach (TimeTriggerModel model in bloonModel.GetBehaviors<TimeTriggerModel>()) {
             model.interval = (baseTimeInterval + levelTimeIntervalAddition * level) * multiplier;
         }
 

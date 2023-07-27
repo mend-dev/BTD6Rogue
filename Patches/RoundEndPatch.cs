@@ -1,9 +1,9 @@
 ﻿using Il2CppAssets.Scripts.Unity.UI_New.InGame;
 using HarmonyLib;
 using BTD_Mod_Helper.Extensions;
-using System.Collections.Generic;
-using Il2CppAssets.Scripts.Unity;
+using System.Threading;
 using System;
+using Il2CppAssets.Scripts.Unity;
 
 namespace BTD6Rogue;
 
@@ -22,10 +22,34 @@ static class RoundEndPatch {
             __instance.GetGameModel().roundSet.rounds[completedRound + 1] = BTD6Rogue.mod.roundGenerator.GetRandomRoundModel(__instance.GetGameModel().roundSet.rounds[completedRound + 1], completedRound + 1);
         }
 
+        if ((completedRound + 1) % 20 == 1) {
+            int bossInt = new Random().Next(BTD6Rogue.mod.roundGenerator.possibleBosses.Count);
+            BTD6Rogue.mod.roundGenerator.nextBoss = BTD6Rogue.mod.roundGenerator.possibleBosses[bossInt];
+            if (BTD6Rogue.mod.roundGenerator.nextBoss == "RogueBloonarius") {
+                Game.instance.ShowMessage("The smell of sludge and algae permeates the air", 20f);
+            } else if (BTD6Rogue.mod.roundGenerator.nextBoss == "RogueVortex") {
+                Game.instance.ShowMessage("Strong gusts of wind begin to blow sharply", 20f);
+            } else if (BTD6Rogue.mod.roundGenerator.nextBoss == "RogueDreadbloon") {
+                Game.instance.ShowMessage("The ground shakes beneath your feet", 20f);
+            } else if (BTD6Rogue.mod.roundGenerator.nextBoss == "RoguePhayze") {
+                Game.instance.ShowMessage("Reality begins to distort", 20f);
+            } else if (BTD6Rogue.mod.roundGenerator.nextBoss == "RogueLych") {
+                Game.instance.ShowMessage("A feeling of death surrounds you", 20f);
+            } else {
+                Game.instance.ShowMessage("ERROR MESSAGE SEND HELP", 20f);
+            }
+        }
+
         // Tower choice every 10 rounds (starting at 5)
         if ((completedRound + 1) % BTD6Rogue.RoundsPerRandomTower == BTD6Rogue.TowersStartAtRound && BTD6Rogue.RandomTowers) {
             __instance.bridge.SetAutoPlay(false);
+            if (BTD6Rogue.mod.rerolls < 3) { BTD6Rogue.mod.rerolls++; }
             TowerChoicePanel.Create(__instance.uiRect, __instance);
+        }
+
+        if ((completedRound + 1) % 90 == 0) {
+            __instance.bridge.SetAutoPlay(false);
+            ParagonChoicePanel.Create(__instance.uiRect, __instance);
         }
 
         // Hero choice every 40 rounds

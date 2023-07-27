@@ -6,7 +6,7 @@ namespace BTD6Rogue;
 public static class DreadRockConfig {
 
     // General Stats
-    public static readonly float baseMaxHealth = 20;
+    public static readonly float baseMaxHealth = 25;
     public static readonly float levelMaxHealthMultiplier = 2.5f;
 
     public static readonly float baseSpeed = 1f;

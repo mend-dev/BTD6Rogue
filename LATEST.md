@@ -1,17 +1,11 @@
-Version 1.3:
+Version 1.5:
 
 NEW FEATURES:
-- Lych Boss
-- Fixed the dumb bug where same tower in a choice messes which upgrades you get
-- Removed the scuffed "10 mil" upgrade in favor of actually locking upgrades
-- Changed the difficulty icons
-- Nerfed Early Game
-- Buffed mid-late game
+- PHAYZE (before Ninja Kiwi started the boss event :p)
+- Rerolling towers
 
-Upcoming in Version 1.4+:
-- Dreadbloon Boss
+Upcoming in Version 1.6+:
 - Difficulties effecting costs
-- Mod settings
 - Modifiers
 - Artifacts
 - Banana Farmer, Pontoon, and Portable Lake as towers you can get
