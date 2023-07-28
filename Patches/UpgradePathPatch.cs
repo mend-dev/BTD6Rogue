@@ -2,6 +2,7 @@
 using HarmonyLib;
 using Il2CppAssets.Scripts.Unity.UI_New.InGame;
 using Il2CppAssets.Scripts.Simulation.Towers;
+using BTD_Mod_Helper;
 
 namespace BTD6Rogue;
 
@@ -22,5 +23,24 @@ static class UpgradePathPatch {
         } else if (path == 2) {
             if (tower.GetUpgrade(path) != null && tower.GetUpgrade(path).tier >= BTD6Rogue.mod.rogueTowers[tower.towerModel.baseId].limitPaths[2]) { __result = true; } else if (tower.GetUpgrade(path) != null) { __result = false; }
         }
+    }
+}
+
+// thanks doombubbles for the code :thumbs_up:
+[HarmonyPatch(typeof(UpgradeObject), nameof(UpgradeObject.UpdateVisuals))]
+internal static class UpgradeObject_UpdateVisuals {
+    [HarmonyPrefix]
+    private static bool Prefix(UpgradeObject __instance, int path, bool upgradeClicked) {
+        if (__instance.towerSelectionMenu.IsUpgradePathClosed(path)) {
+            __instance.upgradeButton.SetUpgradeModel(null);
+        }
+        __instance.CheckLocked();
+        var maxTier = __instance.CheckBlockedPath();
+        var maxTierRestricted = __instance.CheckRestrictedPath();
+        __instance.SetTier(__instance.tier, maxTier, maxTierRestricted);
+        __instance.currentUpgrade.UpdateVisuals();
+        __instance.upgradeButton.UpdateVisuals(path, upgradeClicked);
+
+        return false;
     }
 }
