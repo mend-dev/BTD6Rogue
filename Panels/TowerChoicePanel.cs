@@ -102,6 +102,13 @@ public class TowerChoicePanel : MonoBehaviour {
             ModHelperText towerName = rerollButton.AddText(new Info("Tower Name", 0, 0, 650, 76), "Reroll: " + BTD6Rogue.mod.rerolls, 64);
         }
 
+        if (towerChoicePanel.towerModels[0].name == towerChoicePanel.towerModels[1].name ||
+            towerChoicePanel.towerModels[1].name == towerChoicePanel.towerModels[2].name ||
+            towerChoicePanel.towerModels[2].name == towerChoicePanel.towerModels[0].name)
+        {
+            towerChoicePanel.RerollTowers();
+        }
+
         return towerChoicePanel;
     }
 }

@@ -30,6 +30,12 @@ public class HeroChoicePanel : MonoBehaviour {
         uiPanel = null!;
         Destroy(gameObject);
     }
+    
+    public void RerollHeros() {
+        BTD6Rogue.mod.rerolls--;
+        Create(__instance.uiRect, __instance);
+        Destroy(gameObject);
+    }
 
     public static HeroChoicePanel Create(RectTransform menu, InGame __instance) {
         BTD6Rogue.mod.uiOpen = true;
@@ -54,6 +60,11 @@ public class HeroChoicePanel : MonoBehaviour {
             towerButton.AddImage(new Info("Image") { AnchorMin = new Vector2(0, 0), AnchorMax = new Vector2(1, 1), Size = 50 }, hero.portrait.GetGUID());
         }
 
+        if (heroes[0].name == heroes[1].name || heroes[1].name == heroes[2].name || heroes[2].name == heroes[0].name)
+        {
+            heroChoicePanel.RerollHeros();
+        }
+        
         return heroChoicePanel;
     }
 }
