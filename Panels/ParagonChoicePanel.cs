@@ -45,6 +45,12 @@ public class ParagonChoicePanel : MonoBehaviour {
         uiPanel = null!;
         Destroy(gameObject);
     }
+    
+    public void RerollParagons() {
+        BTD6Rogue.mod.rerolls--;
+        Create(__instance.uiRect, __instance);
+        Destroy(gameObject);
+    }
 
     public static ParagonChoicePanel Create(RectTransform menu, InGame __instance) {
         BTD6Rogue.mod.uiOpen = true;
@@ -69,6 +75,13 @@ public class ParagonChoicePanel : MonoBehaviour {
         }
         ModHelperText chooseText = inset.AddText(new Info("Tower Amount", 0, 400, 2000, 100), "Choose a Path", 86);
         ModHelperText infoText = inset.AddText(new Info("Tower Amount", 0, 300, 2000, 100), "None of these paths will show up again, choose wisely", 56);
+        
+        if (towerModels[0].name == towerModels[1].name ||
+            towerModels[1].name == towerModels[2].name ||
+            towerModels[2].name == towerModels[0].name)
+        {
+            towerChoicePanel.RerollParagons();
+        }
 
         return towerChoicePanel;
     }
