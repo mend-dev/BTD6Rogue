@@ -1,88 +1,73 @@
 ﻿using System;
 using System.Collections.Generic;
-using BTD_Mod_Helper;
 using BTD_Mod_Helper.Api.Components;
 using BTD_Mod_Helper.Api.Enums;
 using BTD_Mod_Helper.Extensions;
 using Il2CppAssets.Scripts.Models.Towers;
-using Il2CppAssets.Scripts.Models.TowerSets;
 using Il2CppAssets.Scripts.Simulation.Input;
-using Il2CppAssets.Scripts.Simulation.Towers;
 using Il2CppAssets.Scripts.Unity;
-using Il2CppAssets.Scripts.Unity.UI_New.InGame;
-using Il2CppAssets.Scripts.Unity.UI_New.InGame.RightMenu.Powers;
 using MelonLoader;
 using UnityEngine;
 
 namespace BTD6Rogue;
 
 [RegisterTypeInIl2Cpp(false)]
-public class ParagonChoicePanel : MonoBehaviour {
+public class ParagonChoicePanel : RoguePanel {
 
-    public InGame __instance = null!;
-    public static ParagonChoicePanel uiPanel = null!;
-
-    public string[] paragonChoices = new string[3];
-
-    public ParagonChoicePanel(IntPtr ptr) : base(ptr) { }
+    public TowerModel[] paragonChoices = new TowerModel[3];
 
     public void ChooseTower(string towerName) {
-        TowerInventory towerInventory = __instance.GetTowerInventory();
+        TowerInventory towerInventory = game.GetTowerInventory();
         int tower = Array.IndexOf(paragonChoices, towerName);
         string towerStr = Game.instance.model.GetTowerWithName(towerName).baseId;
         towerInventory.towerMaxes[towerStr] += 3;
 
-        BTD6Rogue.mod.rogueTowers[towerStr].limitPaths[0] = 6;
-        BTD6Rogue.mod.rogueTowers[towerStr].limitPaths[1] = 6;
-        BTD6Rogue.mod.rogueTowers[towerStr].limitPaths[2] = 6;
-        BTD6Rogue.mod.rogueTowers[towerStr].lockedPaths[0] = true;
-        BTD6Rogue.mod.rogueTowers[towerStr].lockedPaths[1] = true;
-        BTD6Rogue.mod.rogueTowers[towerStr].lockedPaths[2] = true;
+        BTD6Rogue.mod.currentGame.towerData[towerStr].limitPaths[0] = 6;
+        BTD6Rogue.mod.currentGame.towerData[towerStr].limitPaths[1] = 6;
+        BTD6Rogue.mod.currentGame.towerData[towerStr].limitPaths[2] = 6;
+        BTD6Rogue.mod.currentGame.towerData[towerStr].lockedPaths[0] = true;
+        BTD6Rogue.mod.currentGame.towerData[towerStr].lockedPaths[1] = true;
+        BTD6Rogue.mod.currentGame.towerData[towerStr].lockedPaths[2] = true;
 
-        __instance.bridge.OnTowerInventoryChangedSim(true);
-        __instance.bridge.SetAutoPlay(true);
-        BTD6Rogue.mod.uiOpen = false;
-        uiPanel = null!;
-        Destroy(gameObject);
+        game.bridge.OnTowerInventoryChangedSim(true);
+        DestroyPanel();
     }
     
-    public void RerollParagons() {
-        BTD6Rogue.mod.rerolls--;
-        Create(__instance.uiRect, __instance);
-        Destroy(gameObject);
+    public void RerollParagons(bool useReroll = true) {
+        if (useReroll) { BTD6Rogue.mod.currentGame.rerolls--; }
+        BTD6Rogue.mod.currentGame.panelManager.AddPanelToQueue(rect, game, nameof(ParagonChoicePanel));
+        DestroyPanel();
     }
 
-    public static ParagonChoicePanel Create(RectTransform menu, InGame __instance) {
-        BTD6Rogue.mod.uiOpen = true;
-        ModHelperPanel panel = menu.gameObject.AddModHelperPanel(new Info("ReforgePanel", 0, 0, 2400, 1000), VanillaSprites.BrownInsertPanel);
-        ParagonChoicePanel towerChoicePanel = panel.AddComponent<ParagonChoicePanel>();
-        towerChoicePanel.__instance = __instance;
-        uiPanel = towerChoicePanel!;
+    public override void CreatePanel() {
 
         var inset = panel.AddPanel(new Info("InnerPanel") { AnchorMin = new Vector2(0, 0), AnchorMax = new Vector2(1, 1), Size = -50 },
             VanillaSprites.BrownInsertPanelDark);
 
-        TowerModel[] towerModels = ParagonUtil.GetThreeParagons();
+        
+        RogueParagon[] rogueParagons = ParagonUtil.GetThreeParagons();
+        for (int i = 0; i < 3; i++) {
+            paragonChoices[i] = rogueParagons[i].GetParagonTowerModel();
+        }
 
         List<int> xPos = new List<int>() { -800, 0, 800 };
 
-        for (int i = 0; i < towerModels.Length; i++) {
-            TowerModel tower = towerModels[i];
-            towerChoicePanel.paragonChoices[i] = tower.GetTowerId();
+        for (int i = 0; i < paragonChoices.Length; i++) {
+            TowerModel tower = paragonChoices[i];
 
-            ModHelperButton towerButton = inset.AddButton(new Info("Tower Button", xPos[i], -100, 650), VanillaSprites.GreenBtn, new Action(() => towerChoicePanel.ChooseTower(tower.GetTowerId())));
+            ModHelperButton towerButton = inset.AddButton(new Info("Tower Button", xPos[i], -100, 650), VanillaSprites.PurpleBtnLong, new Action(() => ChooseTower(tower.GetTowerId())));
             towerButton.AddImage(new Info("Image") { AnchorMin = new Vector2(0, 0), AnchorMax = new Vector2(1, 1), Size = 50 }, tower.portrait.GetGUID());
         }
-        ModHelperText chooseText = inset.AddText(new Info("Tower Amount", 0, 400, 2000, 100), "Choose a Path", 86);
-        ModHelperText infoText = inset.AddText(new Info("Tower Amount", 0, 300, 2000, 100), "None of these paths will show up again, choose wisely", 56);
-        
-        if (towerModels[0].name == towerModels[1].name ||
-            towerModels[1].name == towerModels[2].name ||
-            towerModels[2].name == towerModels[0].name)
-        {
-            towerChoicePanel.RerollParagons();
+        ModHelperText chooseText = inset.AddText(new Info("Tower Amount", 0, 400, 2000, 100), "Choose a Paragon", 86);
+        ModHelperText infoText = inset.AddText(new Info("Tower Amount", 0, 300, 2000, 100), "You will gain all the tier 5's of the tower", 56);
+
+        if (BTD6Rogue.mod.currentGame.rerolls > 0) {
+            ModHelperButton rerollButton = inset.AddButton(new Info("Reroll Button", 0, -500, 400, 200), VanillaSprites.BlueBtn, new Action(() => RerollParagons()));
+            ModHelperText towerName = rerollButton.AddText(new Info("Tower Name", 0, 0, 650, 76), "Reroll: " + BTD6Rogue.mod.currentGame.rerolls, 64);
         }
 
-        return towerChoicePanel;
+        if (paragonChoices[0].name == paragonChoices[1].name || paragonChoices[1].name == paragonChoices[2].name || paragonChoices[2].name == paragonChoices[0].name) {
+            RerollParagons(false);
+        }
     }
 }

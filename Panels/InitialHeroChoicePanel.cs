@@ -6,44 +6,31 @@ using BTD_Mod_Helper.Extensions;
 using Il2CppAssets.Scripts.Models.Towers;
 using Il2CppAssets.Scripts.Simulation.Input;
 using Il2CppAssets.Scripts.Unity;
-using Il2CppAssets.Scripts.Unity.UI_New.InGame;
 using MelonLoader;
 using UnityEngine;
 
 namespace BTD6Rogue;
 
 [RegisterTypeInIl2Cpp(false)]
-public class InitialHeroChoicePanel : MonoBehaviour {
+public class InitialHeroChoicePanel : RoguePanel {
 
-    public InGame __instance = null!;
-    public static InitialHeroChoicePanel uiPanel = null!;
-    public RectTransform menu = null!;
-
-    public InitialHeroChoicePanel(IntPtr ptr) : base(ptr) { }
-
-    public void ChooseTower(string hero) {
-        BTD6Rogue.mod.selectedHeroes.Add(hero);
-        TowerInventory towerInventory = __instance.GetTowerInventory();
+    public void ChooseHero(string hero) {
+        TowerInventory towerInventory = game.GetTowerInventory();
         towerInventory.towerMaxes[hero] = 1;
-        __instance.bridge.OnTowerInventoryChangedSim(true);
-        if (BTD6Rogue.RandomTowers) {
-            InitialTowerChoicePanel.Create(__instance.uiRect, __instance);
-            uiPanel = null!;
-        }
-        Destroy(gameObject);
+        BTD6Rogue.mod.currentGame.heroData[hero].SelectedHero = true;
+        game.bridge.OnTowerInventoryChangedSim(true);
+        DestroyPanel();
     }
 
-    public static InitialHeroChoicePanel Create(RectTransform menu, InGame __instance) {
-        var panel = menu.gameObject.AddModHelperPanel(new Info("ReforgePanel", 0, 0, 1920, 1080), VanillaSprites.BrownInsertPanel);
-        var initialHeroChoicePanel = panel.AddComponent<InitialHeroChoicePanel>();
-        initialHeroChoicePanel.menu = menu;
-        initialHeroChoicePanel.__instance = __instance;
-        uiPanel = initialHeroChoicePanel!;
+    public override void CreatePanel() {
 
         var inset = panel.AddPanel(new Info("InnerPanel") { AnchorMin = new Vector2(0, 0), AnchorMax = new Vector2(1, 1), Size = -50  },
             VanillaSprites.BrownInsertPanelDark);
 
-        string[] heroes = TowerUtil.heroNames.ToArray();
+        RogueHero[] rogueHeroes = HeroUtil.GetAllHeroes();
+
+        List<string> heroIds = new List<string>();
+        foreach (RogueHero rogueHero in rogueHeroes) { heroIds.Add(rogueHero.BaseHeroId); }
 
         // 0  1  2  3  4
         // 5  6  7  8  9
@@ -61,17 +48,15 @@ public class InitialHeroChoicePanel : MonoBehaviour {
             -350, -350, -350, -350, -350
         };
 
-        for (int i = 0; i < heroes.Length; i++) {
-            TowerModel hero = Game.instance.model.GetTower(heroes[i]);
+        for (int i = 0; i < heroIds.Count; i++) {
+            TowerModel hero = Game.instance.model.GetTower(heroIds[i]);
 
             ModHelperButton button = inset.AddButton(new Info("HeroButton", xPos[i], yPos[i], 300), VanillaSprites.YellowBtn,
-                new Action(() => initialHeroChoicePanel.ChooseTower(hero.GetBaseId())));
+                new Action(() => ChooseHero(hero.GetBaseId())));
 
             button.AddImage(new Info("HeroImage") { AnchorMin = new Vector2(0, 0), AnchorMax = new Vector2(1, 1), Size = 50 }, hero.portrait.GetGUID());
         }
 
         inset.AddText(new Info("InfoText"), "Choose a hero to start with");
-
-        return initialHeroChoicePanel;
     }
 }

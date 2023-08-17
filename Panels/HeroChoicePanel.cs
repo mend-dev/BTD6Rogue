@@ -4,7 +4,6 @@ using BTD_Mod_Helper.Api.Enums;
 using BTD_Mod_Helper.Extensions;
 using Il2CppAssets.Scripts.Models.Towers;
 using Il2CppAssets.Scripts.Simulation.Input;
-using Il2CppAssets.Scripts.Unity.UI_New.InGame;
 using MelonLoader;
 using UnityEngine;
 using System.Collections.Generic;
@@ -12,59 +11,50 @@ using System.Collections.Generic;
 namespace BTD6Rogue;
 
 [RegisterTypeInIl2Cpp(false)]
-public class HeroChoicePanel : MonoBehaviour {
-
-    public InGame __instance = null!;
-    public static HeroChoicePanel uiPanel = null!;
-    public string[] heroChoices = new string[3];
-
-    public HeroChoicePanel(IntPtr ptr) : base(ptr) { }
+public class HeroChoicePanel : RoguePanel {
+    public TowerModel[] towerModels = new TowerModel[3];
 
     public void ChooseTower(string hero) {
-        BTD6Rogue.mod.selectedHeroes.Add(hero);
-        TowerInventory towerInventory = __instance.GetTowerInventory();
+        TowerInventory towerInventory = game.GetTowerInventory();
         towerInventory.towerMaxes[hero]++;
-        __instance.bridge.OnTowerInventoryChangedSim(true);
-        __instance.bridge.SetAutoPlay(true);
-        BTD6Rogue.mod.uiOpen = false;
-        uiPanel = null!;
-        Destroy(gameObject);
+        BTD6Rogue.mod.currentGame.heroData[hero].SelectedHero = true;
+        game.bridge.OnTowerInventoryChangedSim(true);
+        DestroyPanel();
     }
     
-    public void RerollHeros() {
-        BTD6Rogue.mod.rerolls--;
-        Create(__instance.uiRect, __instance);
-        Destroy(gameObject);
+    public void RerollHeroes(bool useReroll = true) {
+        if (useReroll) { BTD6Rogue.mod.currentGame.rerolls--; }
+        BTD6Rogue.mod.currentGame.panelManager.AddPanelToQueue(rect, game, nameof(HeroChoicePanel));
+        DestroyPanel();
     }
 
-    public static HeroChoicePanel Create(RectTransform menu, InGame __instance) {
-        BTD6Rogue.mod.uiOpen = true;
-        var panel = menu.gameObject.AddModHelperPanel(new Info("HeroChoicePanel", 0, 0, 2400, 800),
-            VanillaSprites.BrownInsertPanel);
-        HeroChoicePanel heroChoicePanel = panel.AddComponent<HeroChoicePanel>();
-        heroChoicePanel.__instance = __instance;
-        uiPanel = heroChoicePanel!;
+    public override void CreatePanel() {
 
         var inset = panel.AddPanel(new Info("InnerPanel") { AnchorMin = new Vector2(0, 0), AnchorMax = new Vector2(1, 1), Size = -50 },
             VanillaSprites.BrownInsertPanelDark);
 
-        TowerModel[] heroes = TowerUtil.GetHeroes(TowerUtil.waterMaps.Contains(__instance.GetMap().mapModel.mapName));
+        RogueHero[] heroes = HeroUtil.GetThreeHeroes();
+        for (int i = 0; i < 3; i++) {
+            towerModels[i] = heroes[i].GetBaseTower();
+        }
 
         List<int> xPos = new List<int>() { -800, 0, 800 };
 
-        for (int i = 0; i < heroes.Length; i++) {
-            TowerModel hero = heroes[i];
-            heroChoicePanel.heroChoices[i] = hero.baseId;
+        for (int i = 0; i < towerModels.Length; i++) {
+            TowerModel hero = towerModels[i];
 
-            ModHelperButton towerButton = inset.AddButton(new Info("Tower Button", xPos[i], -0, 650), VanillaSprites.GreenBtn, new Action(() => heroChoicePanel.ChooseTower(hero.baseId)));
+            ModHelperButton towerButton = inset.AddButton(new Info("Tower Button", xPos[i], -0, 650), VanillaSprites.GreenBtn, new Action(() => ChooseTower(hero.baseId)));
+
             towerButton.AddImage(new Info("Image") { AnchorMin = new Vector2(0, 0), AnchorMax = new Vector2(1, 1), Size = 50 }, hero.portrait.GetGUID());
         }
 
-        if (heroes[0].name == heroes[1].name || heroes[1].name == heroes[2].name || heroes[2].name == heroes[0].name)
-        {
-            heroChoicePanel.RerollHeros();
+        if (BTD6Rogue.mod.currentGame.rerolls > 0) {
+            ModHelperButton rerollButton = inset.AddButton(new Info("Reroll Button", 0, -500, 400, 200), VanillaSprites.BlueBtn, new Action(() => RerollHeroes()));
+            ModHelperText towerName = rerollButton.AddText(new Info("Tower Name", 0, 0, 650, 76), "Reroll: " + BTD6Rogue.mod.currentGame.rerolls, 64);
         }
-        
-        return heroChoicePanel;
+
+        if (towerModels[0].name == towerModels[1].name || towerModels[1].name == towerModels[2].name || towerModels[2] == towerModels[0]) {
+            RerollHeroes(false);
+        }
     }
 }

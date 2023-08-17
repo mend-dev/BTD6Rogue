@@ -1,7 +1,35 @@
-﻿namespace BTD6Rogue;
+﻿using BTD_Mod_Helper.Api;
+using System.Collections.Generic;
+using System.Linq;
+
+namespace BTD6Rogue;
 
 public static class DifficultyUtil {
 
+    public static RogueDifficulty GetDifficulty(string difficultyName) {
+        List<RogueDifficulty> difficulties = ModContent.GetContent<RogueDifficulty>();
+
+        foreach (RogueDifficulty difficulty in difficulties) {
+            if (difficultyName == difficulty.DisplayName) {
+                return difficulty;
+            }
+        }
+        return null;
+    }
+
+    public static RogueDifficulty[] GetAllDifficultues() {
+        List<RogueDifficulty> difficulties = ModContent.GetContent<RogueDifficulty>();
+        List<RogueDifficulty> newDifficulties = new List<RogueDifficulty>();
+
+        foreach (RogueDifficulty difficulty in difficulties) { if (difficulty.Name.Contains("Poppable")) { newDifficulties.Add(difficulty); } }
+        foreach (RogueDifficulty difficulty in difficulties) { if (difficulty.Name.Contains("Easy")) { newDifficulties.Add(difficulty); } }
+        foreach (RogueDifficulty difficulty in difficulties) { if (difficulty.Name.Contains("Medium")) { newDifficulties.Add(difficulty); } }
+        foreach (RogueDifficulty difficulty in difficulties) { if (difficulty.Name.Contains("Hard")) { newDifficulties.Add(difficulty); } }
+        foreach (RogueDifficulty difficulty in difficulties) { if (difficulty.Name.Contains("Impoppable")) { newDifficulties.Add(difficulty); } }
+
+
+        return newDifficulties.ToArray();
+    }
 
     public static int GetStartingTowerCount(string mapDifficulty, string gameDifficulty) {
         int startingTowers = BTD6Rogue.BaseStartingTowers;

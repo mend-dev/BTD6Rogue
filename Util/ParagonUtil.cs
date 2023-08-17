@@ -1,37 +1,36 @@
-﻿using Il2CppAssets.Scripts.Models.Towers;
-using Il2CppAssets.Scripts.Unity;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System;
-using BTD_Mod_Helper.Extensions;
+using BTD_Mod_Helper.Api;
 
 namespace BTD6Rogue;
 
 public static class ParagonUtil {
 
-    public static TowerModel[] GetThreeParagons() {
-        List<TowerModel> towerModels = new List<TowerModel>();
+    public static RogueParagon[] GetThreeParagons() {
+        List<RogueParagon> paragons = new List<RogueParagon>();
 
         for (int i = 0; i < 3; i++) {
-            TowerModel newTower = GetParagon();
-            //swhile (towerModels.Contains(newTower)) {
-            //    newTower = GetParagon();
-            //}
-            towerModels.Add(newTower);
+            RogueParagon paragon = GetRandomParagon();
+            while (paragons.Contains(paragon)) {
+                paragon = GetRandomParagon();
+            }
+            paragons.Add(paragon);
         }
 
-        return towerModels.ToArray();
+        return paragons.ToArray();
     }
 
-    public static TowerModel GetParagon() {
+    public static RogueParagon GetRandomParagon() {
         Random random = new Random();
 
-        string[] towerIds = new string[] { TowerType.DartMonkey, TowerType.BoomerangMonkey, TowerType.MonkeyAce, TowerType.MonkeyBuccaneer,
-            TowerType.NinjaMonkey, TowerType.WizardMonkey, TowerType.EngineerMonkey };
+        RogueParagon[] paragons = GetAllParagons();
+        RogueParagon paragon = paragons[random.Next(paragons.Length)];
 
-        string towerId = towerIds[random.Next(towerIds.Length)];
+        return paragon;
+    }
 
-        
-        TowerModel towerModel = Game.instance.model.GetParagonTower(towerId);
-        return towerModel;
+    public static RogueParagon[] GetAllParagons() {
+        List<RogueParagon> paragons = ModContent.GetContent<RogueParagon>();
+        return paragons.ToArray();
     }
 }

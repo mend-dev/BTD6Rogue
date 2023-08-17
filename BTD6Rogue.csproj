@@ -10,10 +10,28 @@
         <DebugType>embedded</DebugType>
     </PropertyGroup>
     <ItemGroup>
-      <Folder Include="Artifacts\Bloons\" />
-      <Folder Include="Bloons\" />
-      <Folder Include="Bosses\Blastapopoulos\" />
-      <Folder Include="Bosses\Phayze\" />
+      <Compile Remove="Bloons\Brown\**" />
+      <Compile Remove="Bloons\Calico\**" />
+      <Compile Remove="Bloons\Giraffe\**" />
+      <Compile Remove="Bloons\Orange\**" />
+      <Compile Remove="Bosses\Blastapopoulos\**" />
+      <EmbeddedResource Remove="Bloons\Brown\**" />
+      <EmbeddedResource Remove="Bloons\Calico\**" />
+      <EmbeddedResource Remove="Bloons\Giraffe\**" />
+      <EmbeddedResource Remove="Bloons\Orange\**" />
+      <EmbeddedResource Remove="Bosses\Blastapopoulos\**" />
+      <None Remove="Bloons\Brown\**" />
+      <None Remove="Bloons\Calico\**" />
+      <None Remove="Bloons\Giraffe\**" />
+      <None Remove="Bloons\Orange\**" />
+      <None Remove="Bosses\Blastapopoulos\**" />
+    </ItemGroup>
+    <ItemGroup>
+      <Folder Include="Artifacts\Income\" />
+      <Folder Include="Maps\VanillaMaps\ExpertMaps\" />
+      <Folder Include="Maps\VanillaMaps\BeginnerMaps\" />
+      <Folder Include="Maps\VanillaMaps\AdvancedMaps\" />
+      <Folder Include="Maps\VanillaMaps\IntermediateMaps\" />
     </ItemGroup>
 
     <Import Project="..\btd6.targets" />
