@@ -44,8 +44,8 @@ public static class DreadbloonConfig {
     public static void ApplyDreadbloonSettings(BloonModel bloonModel, string difficulty, int level) {
         float multiplier = difficultyMultipliers[difficulty];
 
-        bloonModel.maxHealth = baseMaxHealth * (levelMaxHealthMultiplier * level) * multiplier;
-        if (level == 0) { bloonModel.maxHealth = baseMaxHealth * multiplier; }
+        bloonModel.maxHealth = (int)(baseMaxHealth * (levelMaxHealthMultiplier * level) * multiplier);
+        if (level == 0) { bloonModel.maxHealth = (int)(baseMaxHealth * multiplier); }
 
         bloonModel.leakDamage = 99999f;
         bloonModel.speed = (baseSpeed + levelSpeedAddition * level) * multiplier;
