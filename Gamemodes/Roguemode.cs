@@ -42,7 +42,7 @@ public class Roguemode : ModGameMode {
 
     public void ChangeCostModifier(float modifier) {
         if (!baseGameModeModel.HasMutator<GlobalCostModModel>()) {
-            baseGameModeModel.AddMutator(new GlobalCostModModel("costMultiplier", 1f, false));
+            baseGameModeModel.AddMutator(new GlobalCostModModel("costMultiplier", 1f));
         }
         baseGameModeModel.GetMutator<GlobalCostModModel>().multiplier = modifier;
     }

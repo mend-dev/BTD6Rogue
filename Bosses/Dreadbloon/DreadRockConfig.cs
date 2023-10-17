@@ -27,8 +27,8 @@ public static class DreadRockConfig {
     public static void ApplyDreadRockSettings(BloonModel bloonModel, string difficulty, int level) {
         float multiplier = difficultyMultipliers[difficulty];
 
-        bloonModel.maxHealth = baseMaxHealth * (levelMaxHealthMultiplier * level) * multiplier;
-        if (level == 0) { bloonModel.maxHealth = baseMaxHealth * multiplier; }
+        bloonModel.maxHealth = (int)(baseMaxHealth * (levelMaxHealthMultiplier * level) * multiplier);
+        if (level == 0) { bloonModel.maxHealth = (int)(baseMaxHealth * multiplier); }
 
         bloonModel.leakDamage = (baseLeakDamage + levelLeakDamageAddition * level) * multiplier; ;
         bloonModel.speed = (baseSpeed + levelSpeedAddition * level) * multiplier;
