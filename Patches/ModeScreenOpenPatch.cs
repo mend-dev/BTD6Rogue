@@ -1,11 +1,11 @@
-﻿using HarmonyLib;
+using HarmonyLib;
 using Il2CppAssets.Scripts.Unity.UI_New.Main.ModeSelect;
 using Il2CppAssets.Scripts.Unity.UI_New.Main.DifficultySelect;
 using BTD_Mod_Helper.Extensions;
 using BTD_Mod_Helper.Api.Components;
 using System;
 using BTD_Mod_Helper.Api;
-using Il2CppAssets.Scripts.Utils;
+using Il2CppNinjaKiwi.Common.ResourceUtils;
 using UnityEngine;
 
 namespace BTD6Rogue;

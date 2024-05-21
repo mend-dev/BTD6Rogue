@@ -1,8 +1,8 @@
 namespace BTD6Rogue;
 
 public static class ModHelperData {
-    public const string WorksOnVersion = "39.1";
-    public const string Version = "2.0.2";
+    public const string WorksOnVersion = "42";
+    public const string Version = "2.0.3";
     public const string Name = "BTD6Rogue";
     public const string Description =
         "BTD6 Rogue! The mod that turns bloons into a Roguelike, or BTD7 apparently\n" +
