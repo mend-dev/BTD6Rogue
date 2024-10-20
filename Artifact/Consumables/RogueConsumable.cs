@@ -1,0 +1,1 @@
+﻿namespace BTD6Rogue.Artifacts.Consumables;

@@ -1,35 +1,18 @@
-Version 1.5:
+Version 3.0.0
 
-NEW FEATURES:
-- PHAYZE (before Ninja Kiwi started the boss event :p)
-- Rerolling towers
+Welcome back to BTD6Rogue rewritten from the ground up (for the most part)
 
-Upcoming in Version 1.6+:
-- Difficulties effecting costs
-- Modifiers
-- Artifacts
-- Banana Farmer, Pontoon, and Portable Lake as towers you can get
+As my vision for this mod expanded it became very obvious that my poorly written code when I was first
+learning how to mod BTD6 was not able to handle a huge amount of the features I had planned
 
-
+So I have torn my code apart and tried my best to rework the entire mod to run better, be easier to fix bugs
+and make new features without jumping through dozens of hoops created by spaghetti code
 
 General Disclaimer:
-
-This mod is UNTESTED in anything other than the solo base game
-
-If you use this mod in:
-- Quests
-- Daily Challenges
-- Events
-- Coop
-- All that other stuff
-
-You're on your own. I do plan on figuring out Coop for this mod, but for the time being I got other priorities. Feel free to test this on your own though, if you
-find any bugs, think of any suggestions, and other stuff. Hit me up on my Discord, that's where I'm most active.
+This mod is currently UNTESTED in anything other than singleplayer in the base game
+Quests, Daily Challenges, Events, Coop, Bosses, Custom Maps, and everything else is completely untested
 
 And hey, if you're a content creator, and want to use this mod for a video, stream, or anything. Feel free, I made this as a fun gamemode for people to play
 I would appreciate a credit for making the mod, but it's not required
-
-I recommend playing this mod with the FasterForward mod. While Bloons TD6 is a great base for a Roguelike-esc game
-Repeating the same map over and over gets tedious in my opinion. So a 5x or even 10x speed makes it feel 100x less monotonous
 
 In any case, hope you enjoy the mod! :D
