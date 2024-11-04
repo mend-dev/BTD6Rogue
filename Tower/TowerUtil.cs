@@ -18,7 +18,23 @@ public static class TowerUtil {
 		List<RogueTower> enabledTowers = new List<RogueTower>();
 
 		foreach (RogueTower tower in ModContent.GetContent<RogueTower>()) {
-			if (game.towerManager.disabledTowerSets.Contains(tower.GetBaseTower().towerSet)) {
+            if (tower.GetBaseTower() is null)
+            {
+                BTD6Rogue.LogMessage("The RogueTower " + tower.Name + "'s BaseTowerId (" + tower.BaseTowerId + ") returns a null tower. It has been disabled.", tower, ErrorLevels.Error);
+                continue;
+            }
+
+            if (tower.GetBaseTower().towerSet == Il2CppAssets.Scripts.Models.TowerSets.TowerSet.Hero)
+            {
+                BTD6Rogue.LogMessage("The RogueTower " + tower.Name + "'s BaseTowerId (" + tower.BaseTowerId + ") returns a tower in the Hero TowerSet. This may cause issues.", tower, ErrorLevels.Warning);
+            }
+
+            if (tower.GetBaseTower().towerSet == Il2CppAssets.Scripts.Models.TowerSets.TowerSet.Paragon)
+            {
+                BTD6Rogue.LogMessage("The RogueTower " + tower.Name + "'s BaseTowerId (" + tower.BaseTowerId + ") returns a (base) tower in the Paragon TowerSet. This may cause issues.", tower, ErrorLevels.Warning);
+            }
+
+            if (game.towerManager.disabledTowerSets.Contains(tower.GetBaseTower().towerSet)) {
 				continue;
 			}
 
