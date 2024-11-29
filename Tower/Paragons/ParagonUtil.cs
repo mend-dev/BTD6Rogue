@@ -1,4 +1,5 @@
 ﻿using BTD_Mod_Helper.Api;
+using Il2CppAssets.Scripts.Models.Towers;
 using System;
 using System.Collections.Generic;
 
@@ -10,7 +11,17 @@ public static class ParagonUtil {
 		List<RogueParagon> enabledTowers = new List<RogueParagon>();
 
 		foreach (RogueParagon tower in ModContent.GetContent<RogueParagon>()) {
-			if (game.towerManager.disabledTowerSets.Contains(Il2CppAssets.Scripts.Models.TowerSets.TowerSet.Paragon)) {
+
+            if (tower.GetBaseTower() is null || tower.GetBaseParagon() is null)
+            {
+                BTD6Rogue.LogMessage("The RogueParagon " + tower.Name + "'s BaseTowerId (" + tower.BaseTowerId + ") returns a null tower.", tower, ErrorLevels.Error);
+                continue;
+            }
+            if (tower.GetBaseTower().towerSet == Il2CppAssets.Scripts.Models.TowerSets.TowerSet.Hero)
+            {
+                BTD6Rogue.LogMessage("The RogueParagon " + tower.Name + "'s BaseTowerId (" + tower.BaseTowerId + ") returns a tower in the Hero TowerSet. This may cause issues.", tower, ErrorLevels.Warning);
+            }
+            if (game.towerManager.disabledTowerSets.Contains(Il2CppAssets.Scripts.Models.TowerSets.TowerSet.Paragon)) {
 				continue;
 			}
 			if (game.towerManager.disabledTowerSets.Contains(tower.GetBaseTower().towerSet)) {

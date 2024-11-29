@@ -10,7 +10,16 @@ public static class HeroUtil {
 		List<RogueHero> enabledTowers = new List<RogueHero>();
 
 		foreach (RogueHero tower in ModContent.GetContent<RogueHero>()) {
-			if (game.towerManager.disabledTowerSets.Contains(Il2CppAssets.Scripts.Models.TowerSets.TowerSet.Hero)) {
+            if (tower.GetBaseHero() is null)
+            {
+                BTD6Rogue.LogMessage("The RogueHero " + tower.Name + "'s BaseHeroId (" + tower.BaseHeroId + ") returns a null tower. They have been disabled.", tower, ErrorLevels.Error);
+                continue;
+            }
+            if (tower.GetBaseHero().towerSet != Il2CppAssets.Scripts.Models.TowerSets.TowerSet.Hero)
+            {
+                BTD6Rogue.LogMessage("The RogueTower " + tower.Name + "'s BaseTowerId (" + tower.BaseHeroId + ") returns a tower outside of the Hero TowerSet. This may cause issues.", tower, ErrorLevels.Warning);
+            }
+            if (game.towerManager.disabledTowerSets.Contains(Il2CppAssets.Scripts.Models.TowerSets.TowerSet.Hero)) {
 				continue;
 			}
 
