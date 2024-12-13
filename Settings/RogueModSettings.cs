@@ -26,7 +26,7 @@ public class RogueModSettings : ModSettings {
             BloonValidation v = new();
             v.ValidateAllRogueBloons();
             PopupScreen.instance.SafelyQueue(screen =>
-            screen.ShowOkPopup($"Finished validating RogueBloons. Check the logs."));
+            screen.ShowOkPopup($"Finished validating RogueBloons. Check the logs for details."));
         },
         buttonText = "Validate",
         category = "Modding"
