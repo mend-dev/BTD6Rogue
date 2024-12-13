@@ -9,7 +9,12 @@ namespace BTD6Rogue;
 [HarmonyPatch(typeof(TowerSelectionMenu), nameof(TowerSelectionMenu.IsUpgradePathClosed))]
 internal static class TowerSelectionMenu_IsUpgradePathClosed {
     [HarmonyPostfix]
-    private static void Postfix(TowerSelectionMenu __instance, int path, ref bool __result) {
+    private static void Postfix(TowerSelectionMenu __instance, int path, ref bool __result)
+    {
+        if (!InGame.instance.GetGameModel().gameMode.Contains("BTD6Rogue-")) { return; }
+
+        if (BTD6Rogue.rogueGame is null) { return; }
+
         if (__instance.selectedTower == null) { return; }
 
         Tower tower = __instance.selectedTower.tower;

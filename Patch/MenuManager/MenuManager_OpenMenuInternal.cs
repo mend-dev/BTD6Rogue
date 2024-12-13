@@ -14,10 +14,10 @@ namespace BTD6Rogue;
 // Praise the patch for it allows menus OF THE SAME TYPE TO BE STACKED OVER EACHOTHER!!!
 // TODO: Menus of the same type overwrite eachother in the stack making it so if you press the back button, in this case, it sends the user back to the main menu rather than the previous menu
 // TODO: Delete Il2Cpp and obfuscation from existence
-[HarmonyPatch(typeof(BTDMenuManager._OpenMenuInternal_d__53), nameof(BTDMenuManager._OpenMenuInternal_d__53.MoveNext))]
+[HarmonyPatch(typeof(BTDMenuManager._OpenMenuInternal_d__52), nameof(BTDMenuManager._OpenMenuInternal_d__52.MoveNext))]
 static class MenuManagerOpenMenuInternal54_MoveNext {
 	[HarmonyPrefix]
-	static void Prefix(BTDMenuManager._OpenMenuInternal_d__53 __instance) {
+	static void Prefix(BTDMenuManager._OpenMenuInternal_d__52 __instance) {
 		bool isModdedMenu = false;
 		ModMenuData mmd = null!;
 		if (__instance.menuData != null) {
@@ -28,7 +28,7 @@ static class MenuManagerOpenMenuInternal54_MoveNext {
 		}
 		if (__instance.__1__state == 0 && isModdedMenu) {
 			__instance.__1__state = 1;
-			__instance.__8__1 = new BTDMenuManager.__c__DisplayClass53_0();
+			__instance.__8__1 = new BTDMenuManager.__c__DisplayClass52_0();
 			__instance.__8__1.__4__this = __instance.__4__this;
 			__instance.__8__1.previousMenu = __instance.__4__this.currMenu;
 
@@ -44,7 +44,7 @@ static class MenuManagerOpenMenuInternal54_MoveNext {
 		}
 	}
 	[HarmonyPostfix]
-	static void Postfix(BTDMenuManager._OpenMenuInternal_d__53 __instance) {
+	static void Postfix(BTDMenuManager._OpenMenuInternal_d__52 __instance) {
 		bool isModdedMenu = false;
 		ModMenuData mmd = null!;
 		if (__instance.menuData != null) {

@@ -7,6 +7,7 @@ using BTD_Mod_Helper.Extensions;
 using Il2CppAssets.Scripts.Simulation.Bloons.Behaviors;
 using UnityEngine;
 using System;
+using BloonType = BTD_Mod_Helper.Api.Enums.BloonType;
 
 namespace BTD6Rogue;
 
