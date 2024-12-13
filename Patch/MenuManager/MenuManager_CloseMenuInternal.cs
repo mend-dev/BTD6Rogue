@@ -9,15 +9,15 @@ using BTD_Mod_Helper.Extensions;
 
 namespace BTD6Rogue;
 
-[HarmonyPatch(typeof(BTDMenuManager._CloseCurrentMenuInternal_d__58), nameof(BTDMenuManager._CloseCurrentMenuInternal_d__58.MoveNext))]
+[HarmonyPatch(typeof(BTDMenuManager._CloseCurrentMenuInternal_d__57), nameof(BTDMenuManager._CloseCurrentMenuInternal_d__57.MoveNext))]
 static class CloseCur {
 	[HarmonyPrefix]
-	static void Prefix(BTDMenuManager._CloseCurrentMenuInternal_d__58 __instance, out string __state) {
+	static void Prefix(BTDMenuManager._CloseCurrentMenuInternal_d__57 __instance, out string __state) {
 		__state = __instance._menuName_5__2;
 		Il2CppSystem.ValueTuple<string, Object> lastStackedMenu = __instance.__4__this.menuStack[__instance.__4__this.menuStack.Count - 1];
 
 		if (__instance.__1__state == 0 && lastStackedMenu.Item1.Contains("ModdedMenu")) {
-			__instance.__8__1 = new BTDMenuManager.__c__DisplayClass58_0();
+			__instance.__8__1 = new BTDMenuManager.__c__DisplayClass57_0();
 			__instance.__8__1.__4__this = __instance.__4__this;
 			__instance.__4__this.IsClosingOrOpeningMenu = true;
 			__instance.__8__1.closingMenu = __instance.__4__this.currMenu;
@@ -48,7 +48,7 @@ static class CloseCur {
 		}
 	}
 	[HarmonyPostfix]
-	static void Postfix(BTDMenuManager._CloseCurrentMenuInternal_d__58 __instance, string __state) {
+	static void Postfix(BTDMenuManager._CloseCurrentMenuInternal_d__57 __instance, string __state) {
 		if (__state != null && __state.Contains("ModdedMenu") && __instance.__4__this.menuStack.Count > 1) {
 			string oldName = __state.Split("-")[0];
 
