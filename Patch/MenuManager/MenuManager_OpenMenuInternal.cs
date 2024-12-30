@@ -15,7 +15,7 @@ namespace BTD6Rogue;
 // TODO: Menus of the same type overwrite eachother in the stack making it so if you press the back button, in this case, it sends the user back to the main menu rather than the previous menu
 // TODO: Delete Il2Cpp and obfuscation from existence
 [HarmonyPatch(typeof(BTDMenuManager._OpenMenuInternal_d__52), nameof(BTDMenuManager._OpenMenuInternal_d__52.MoveNext))]
-static class MenuManagerOpenMenuInternal54_MoveNext {
+static class MenuManager_OpenMenuInternal {
 	[HarmonyPrefix]
 	static void Prefix(BTDMenuManager._OpenMenuInternal_d__52 __instance) {
 		bool isModdedMenu = false;

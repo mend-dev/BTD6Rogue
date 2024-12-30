@@ -172,5 +172,7 @@ public class RogueGame {
 		rerolls = 3;
 		roundManager.GenerateRound(0, true);
 		roundManager.GenerateBossBag();
+
+		gamemode.OnMatchStart();
 	}
 }

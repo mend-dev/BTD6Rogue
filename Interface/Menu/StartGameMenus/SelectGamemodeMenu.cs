@@ -7,9 +7,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 using Object = Il2CppSystem.Object;
-using Il2CppAssets.Scripts.Data.Skins;
 using Il2CppAssets.Scripts.Unity.UI_New.Popups;
-using Il2CppAssets.Scripts.Data.Boss;
 
 namespace BTD6Rogue;
 
@@ -17,7 +15,7 @@ namespace BTD6Rogue;
 public class SelectGamemodeMenu : ModGameMenu<ExtraSettingsScreen> {
 
 	public override bool OnMenuOpened(Object data) {
-
+		// Remove base ExtraSettingsScreen UI
 		CommonForegroundHeader.SetText("Select Gamemode");
 		RectTransform panelTransform = GameMenu.gameObject.GetComponentInChildrenByName<RectTransform>("Panel");
 		GameObject panel = panelTransform.gameObject;
@@ -29,6 +27,8 @@ public class SelectGamemodeMenu : ModGameMenu<ExtraSettingsScreen> {
 
 		List<RogueGamemode> gamemodes = GetContent<RogueGamemode>();
 		
+		// Make a large image button for each of the RogueGamemodes
+		// TODO: Turn this into a horizontal scroll panel
 		foreach (RogueGamemode gamemode in gamemodes) {
 			ModHelperButton borderPanel = gamemodesPanel.AddButton(new Info("", InfoPreset.Flex),
 				VanillaSprites.BrownInsertPanelDark, new Action(() => {
@@ -50,11 +50,9 @@ public class SelectGamemodeMenu : ModGameMenu<ExtraSettingsScreen> {
 			ModHelperText gamemodeName = gamemodeImage.AddText(new Info("Name", InfoPreset.Flex) { FlexHeight = 1 },
 				gamemode.DisplayName, 128, Il2CppTMPro.TextAlignmentOptions.Top);
 
-
 			ModHelperText gamemodeDescription = gamemodeImage.AddText(new Info("Description", InfoPreset.Flex) { FlexHeight = 1 }, gamemode.Description, 72,
 				Il2CppTMPro.TextAlignmentOptions.Bottom);
 		}
-
 		return false;
 	}
 }

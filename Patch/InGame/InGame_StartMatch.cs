@@ -1,15 +1,10 @@
-﻿using BTD_Mod_Helper.Api.Helpers;
-using BTD_Mod_Helper.Extensions;
+﻿using BTD_Mod_Helper.Extensions;
 using HarmonyLib;
 using Il2CppAssets.Scripts.Models.Profile;
 using Il2CppAssets.Scripts.Simulation.Track;
-using Il2CppAssets.Scripts.Unity.UI_New;
 using Il2CppAssets.Scripts.Unity.UI_New.InGame;
 using Il2CppAssets.Scripts.Unity.UI_New.InGame.Races;
 using Il2CppNinjaKiwi.Common;
-using Il2CppSystem;
-using Il2CppSystem.Collections;
-using MelonLoader;
 using UnityEngine;
 
 namespace BTD6Rogue;
@@ -37,17 +32,5 @@ internal static class InGame_StartMatch {
 		} else {
 			BTD6Rogue.rogueGame.GameStarted(__instance);
 		}
-	}
-}
-
-
-[HarmonyPatch(typeof(InGame), nameof(InGame.Initialise))]
-internal static class InGame_StartMatcah {
-
-	[HarmonyPostfix]
-	private static void Postfix(InGame __instance) {
-		IEnumerator enumer = __instance.InstantiateUiObject(__instance.inGameMenuDefs[15]);
-		enumer.MoveNext();
-		enumer.MoveNext();
 	}
 }

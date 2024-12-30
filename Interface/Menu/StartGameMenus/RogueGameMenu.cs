@@ -2,8 +2,6 @@
 using BTD_Mod_Helper.Api.Components;
 using BTD_Mod_Helper.Api.Enums;
 using BTD_Mod_Helper.Extensions;
-using Il2CppAssets.Scripts.Data;
-using Il2CppAssets.Scripts.Unity.Map;
 using Il2CppAssets.Scripts.Unity.UI_New.ChallengeEditor;
 using System;
 using System.Collections.Generic;

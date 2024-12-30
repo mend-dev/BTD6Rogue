@@ -3,8 +3,6 @@ using Il2CppAssets.Scripts.Simulation.Track;
 using Il2CppAssets.Scripts.Models.Bloons;
 using Il2CppAssets.Scripts.Simulation.Bloons;
 using Il2CppAssets.Scripts.Models.Towers.Projectiles.Behaviors;
-using Il2CppAssets.Scripts.Simulation.Bloons.Behaviors;
-using Il2CppSystem.Collections.Generic;
 using System;
 
 namespace BTD6Rogue;
@@ -45,22 +43,6 @@ internal static class Spawner_Emit {
         { //Todo: maybe don't do the BTD6Rogue-Boss UI in non BTD6Rogue GameModes?
             __instance.bossBloonManager.currentBoss = __result;
             __instance.bossBloonManager.currentBossTier = Math.Min(((roundNumber + 1) / 20), 5);
-		}
-
-	}
-}
-
-[HarmonyPatch(typeof(SpawnChildren), nameof(SpawnChildren.CreatedChildren))]
-internal static class Spawner_Emasddsit {
-	[HarmonyPostfix]
-	private static void Postfix(SpawnChildren __instance, List<Bloon> childernCreatedIn) {
-        if (BTD6Rogue.rogueGame is null) { return; }
-        if (__instance.bloon.emissionIndex >= 5000) {
-			foreach (Bloon bloon in childernCreatedIn) {
-				IncreaseBloonWorthModel.BloonWorthMutator bme = new IncreaseBloonWorthModel.BloonWorthMutator(
-					"CashlessBloon", 0, 0, "");
-				bloon.AddMutator(bme, -1, false);
-			}
 		}
 
 	}

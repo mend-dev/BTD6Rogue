@@ -1,7 +1,5 @@
-﻿using BTD_Mod_Helper.Api;
-using BTD_Mod_Helper.Api.Enums;
+﻿using BTD_Mod_Helper.Api.Enums;
 using BTD_Mod_Helper.Api.Scenarios;
-using BTD_Mod_Helper.Extensions;
 using Il2CppAssets.Scripts.Models;
 using Il2CppAssets.Scripts.Models.Difficulty;
 
@@ -25,4 +23,10 @@ public abstract class RogueGamemode : ModGameMode {
 		base.ModifyGameModel(gameModel);
 		this.gameModel = gameModel;
 	}
+
+	public virtual void OnMatchStart() { }
+
+	public virtual void OnRoundStart() { }
+
+	public virtual void OnRoundEnd() { }
 }

@@ -19,7 +19,7 @@ internal static class ReanimateMoabsAction_InstantiateReanimatedBloon {
 	}
 
 	[HarmonyPostfix]
-	private static void Postfix(Spawner __instance, BloonModel bloonModel, ref Bloon __result) {
+	private static void Postfix(ReanimateMoabsAction __instance, BloonModel bloonModel, ref Bloon __result) {
 		if (bloonModel.baseId.ToLower().Contains("minilych")) {
 			BossUtil.GetBossFromBloonId(bloonModel.baseId).AdjustBloon(__result, InGame.instance.bridge.GetCurrentRound() / 20, false);
 		}

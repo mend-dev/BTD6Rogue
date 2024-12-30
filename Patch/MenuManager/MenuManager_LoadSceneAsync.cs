@@ -10,7 +10,7 @@ using BTD_Mod_Helper.Extensions;
 namespace BTD6Rogue;
 
 [HarmonyPatch(typeof(BTDMenuManager._LoadSceneAsync_d__34), nameof(BTDMenuManager._LoadSceneAsync_d__34.MoveNext))]
-static class LoadSceneAsync_MoveNext {
+static class MenuManager_LoadSceneAsync {
 	[HarmonyPrefix]
 	static void Prefix(BTDMenuManager._LoadSceneAsync_d__34 __instance, out string __state) {
 		__state = __instance.sceneName;

@@ -1,16 +1,11 @@
 ﻿using HarmonyLib;
-using BTD_Mod_Helper.Api;
-using Il2CppAssets.Scripts.Unity.Menu;
 using UnityEngine.SceneManagement;
 using BTDMenuManager = Il2CppAssets.Scripts.Unity.Menu.MenuManager;
-using Object = Il2CppSystem.Object;
-using System;
-using BTD_Mod_Helper.Extensions;
 
 namespace BTD6Rogue;
 
 [HarmonyPatch(typeof(BTDMenuManager._UnloadSceneAsync_d__35), nameof(BTDMenuManager._UnloadSceneAsync_d__35.MoveNext))]
-static class LoadSceneAsync_MoveNexttttttttttttttttttttttttttttttttttttttt {
+static class MenuManager_UnloadSceneAsync {
 	[HarmonyPrefix]
 	static void Prefix(BTDMenuManager._UnloadSceneAsync_d__35 __instance) {
 		if (__instance.sceneName.Contains("ModdedMenu") && __instance.__1__state == 0) {

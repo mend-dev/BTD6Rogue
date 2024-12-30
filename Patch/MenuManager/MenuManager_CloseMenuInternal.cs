@@ -10,7 +10,7 @@ using BTD_Mod_Helper.Extensions;
 namespace BTD6Rogue;
 
 [HarmonyPatch(typeof(BTDMenuManager._CloseCurrentMenuInternal_d__57), nameof(BTDMenuManager._CloseCurrentMenuInternal_d__57.MoveNext))]
-static class CloseCur {
+static class MenuManager_CloseCurrentMenuInternal {
 	[HarmonyPrefix]
 	static void Prefix(BTDMenuManager._CloseCurrentMenuInternal_d__57 __instance, out string __state) {
 		__state = __instance._menuName_5__2;
