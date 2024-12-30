@@ -25,7 +25,7 @@ public static class ModHelperData {
 		"\n" +
 		"\nFor support I recommend joining the Menddev Discord Server as that is where I am most active" +
 		"\nContent Creators feel free to use this mod in any and all content, credit is appreciated but not required" +
-		"\n" +
+		"\n " +
 		"\nDiscalimer:" +
 		"\nThis mod mses around with A LOT of core features meaning" +
         "\nThere are 0 guarantees on not getting flagged when playing with this mod!";
